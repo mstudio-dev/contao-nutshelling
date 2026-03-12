@@ -1,0 +1,217 @@
+// components/links
+
+// --------------------------------------------------
+// .content-hyperlink – Contao Hyperlink-Element (allgemein)
+// --------------------------------------------------
+.content-hyperlink {
+  // ------ Textlink ------
+  a:not(:has(img)) {
+    color: var(--color-brand-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+
+    &::after {
+      display: inline-block;
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      content: "\f054"; // fa-chevron-right
+      margin-left: 0.35em;
+      font-size: 0.75em;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-brand-blue-light);
+      text-decoration: underline;
+
+      &::after { transform: translateX(3px); }
+    }
+  }
+
+  // ------ Button-Variante (.btn) ------
+  &.btn a:not(:has(img)) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.5rem 1.25rem;
+    background: var(--color-brand-blue);
+    color: oklch(100% 0 0);
+    border-radius: var(--base-border-radius);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: background 0.15s ease;
+
+    &::after {
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      content: "\f054";
+      font-size: 0.75em;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--color-brand-blue-light);
+      color: oklch(100% 0 0);
+      text-decoration: none;
+
+      &::after { transform: translateX(3px); }
+    }
+  }
+
+  // ------ Bildlink / Logo ------
+  figure {
+    margin: 0;
+
+    a {
+      display: inline-block;
+      border-radius: var(--base-border-radius);
+      overflow: hidden; // Overlay-Icon bleibt im Rahmen
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// --------------------------------------------------
+// .content-hyperlink.card – Karten-Darstellung
+// --------------------------------------------------
+.content-hyperlink.card {
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+  overflow: hidden;
+  padding: 1.25rem;
+  // Fließtext: kleiner + ausgegraut
+  font-size: 0.8125rem;
+  color: var(--color-gray);
+  line-height: 1.5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px oklch(0% 0 0 / 0.18);
+  }
+
+  // Textlink als Überschrift: volle Breite, kein Icon, kein Chevron
+  a:not(:has(img)) {
+    display: block;
+    width: 100%;
+    color: var(--color-brand-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+
+    &::before { display: none; }
+    &::after  { display: none; }
+
+    &:hover { color: var(--color-brand-blue-light); }
+  }
+
+  // Externe Links: kleines Icon nach dem Linktext
+  a[target="_blank"]:not(:has(img))::after {
+    display: inline-block;
+    content: '\f35d'; // fa-arrow-up-right-from-square
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.65em;
+    margin-left: 0.3em;
+    vertical-align: 0.15em;
+    opacity: 0.7;
+  }
+
+  // Bildlink als Card: kein Padding, Bild randlos
+  figure {
+    margin: -1.25rem -1.25rem 1rem;
+
+    a {
+      display: block;
+      border-radius: 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// Dark Mode
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .content-hyperlink.card {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+  }
+}
+html[data-color-scheme="dark"] .content-hyperlink.card {
+  background: oklch(27% 0.025 255);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+}
+
+// Automatisches Grid: article .inside mit Card-Hyperlinks
+// (ohne col-4/col-6 — greift nur wenn kein explizites Grid gesetzt ist)
+.mod_article:not(.col-4):not(.col-6) .inside:has(> .content-hyperlink.card) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: var(--grid-gutter);
+  align-items: stretch;
+
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// --------------------------------------------------
+// EXTERNE LINKS – Font Awesome Extern-Icon
+// --------------------------------------------------
+
+// 1) Bildlinks: halbtransparentes Overlay on Hover/Focus
+a[target="_blank"]:has(img) {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '\f35d';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: oklch(0% 0 0 / 0.45);
+    color: oklch(100% 0 0);
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+  }
+}
+
+// 2) Textlinks in #main: kleines Icon nachgestellt
+[id="main"] a[target="_blank"]:not(:has(img)) {
+  &::after {
+    content: '\f35d';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.65em;
+    margin-left: 0.3em;
+    vertical-align: 0.15em;
+    opacity: 0.7;
+  }
+}

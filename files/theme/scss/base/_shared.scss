@@ -1,0 +1,196 @@
+// base/shared
+
+// Nutshell setzt margin: 0 auto auf img → Bilder werden zentriert.
+// Überschreiben: Bilder linksbündig (margin: 0), Zentrierung nur wo explizit gewünscht.
+img {
+  margin: 0;
+}
+
+// Abstand zwischen Content-Elementen nur im #main-Bereich
+[id="main"] .inside > .block {
+  padding-bottom: var(--base-spacing-unit-lg); // 2rem
+}
+
+// --------------------------------------------------
+// Pagination (nav.pagination)
+// --------------------------------------------------
+.pagination {
+  margin-top: var(--base-spacing-unit);
+
+  // Info-Text "Seite X von Y"
+  > p {
+    font-size: 0.8125rem;
+    color: var(--color-gray);
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  li {
+    a,
+    strong {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.25rem;
+      height: 2.25rem;
+      padding: 0 0.5rem;
+      border-radius: var(--base-border-radius);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 1;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    a {
+      color: var(--color-brand-blue);
+      background: transparent;
+
+      &:hover,
+      &:focus-visible {
+        background: var(--color-gray-light);
+        color: var(--color-brand-blue);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-brand-yellow);
+        outline-offset: 2px;
+      }
+    }
+
+    strong.active {
+      background: var(--color-brand-blue);
+      color: var(--color-text-inverted);
+      cursor: default;
+    }
+  }
+
+  // Vor-/Zurück + Erste/Letzte: Icon statt Text (alles in einer Regel)
+  li.previous a,
+  li.next     a,
+  li.first    a,
+  li.last     a {
+    font-size: 0;
+    min-width: 2.25rem;
+  }
+
+  li.previous a::before {
+    content: '\f053';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: block;
+  }
+
+  li.next a::before {
+    content: '\f054';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: block;
+  }
+
+  li.first a::before {
+    content: '\f100';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: block;
+  }
+
+  li.last a::before {
+    content: '\f101';
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: block;
+  }
+}
+
+// Dunkelblau + kurzer gelber Akzentbalken für alle h1 in #main
+[id="main"] h1 {
+  color: var(--color-brand-blue);
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: var(--base-spacing-unit);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3rem;
+    height: 4px;
+    background: var(--color-brand-yellow);
+    border-radius: 2px;
+  }
+}
+
+// Gelbes Underline für alle h2 in #main
+[id="main"] h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: var(--base-spacing-unit);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-brand-yellow);
+    border-radius: 2px;
+  }
+}
+
+// --------------------------------------------------
+// Spacing-Utilities – Margin + Padding
+// Basierend auf --base-spacing-unit-* Variablen
+// Im Contao-Backend am CSS-Feld eintragen
+// --------------------------------------------------
+
+// Margin-Top
+.mt-0  { margin-top: 0 !important; }
+.mt-xs { margin-top: var(--base-spacing-unit-xs) !important; }
+.mt-sm { margin-top: var(--base-spacing-unit-sm) !important; }
+.mt-md { margin-top: var(--base-spacing-unit) !important; }
+.mt-lg { margin-top: var(--base-spacing-unit-lg) !important; }
+.mt-xl { margin-top: var(--base-spacing-unit-xl) !important; }
+
+// Margin-Bottom
+.mb-0  { margin-bottom: 0 !important; }
+.mb-xs { margin-bottom: var(--base-spacing-unit-xs) !important; }
+.mb-sm { margin-bottom: var(--base-spacing-unit-sm) !important; }
+.mb-md { margin-bottom: var(--base-spacing-unit) !important; }
+.mb-lg { margin-bottom: var(--base-spacing-unit-lg) !important; }
+.mb-xl { margin-bottom: var(--base-spacing-unit-xl) !important; }
+
+// Padding-Top
+.pt-0  { padding-top: 0 !important; }
+.pt-sm { padding-top: var(--base-spacing-unit-sm) !important; }
+.pt-md { padding-top: var(--base-spacing-unit) !important; }
+.pt-lg { padding-top: var(--base-spacing-unit-lg) !important; }
+
+// Padding-Bottom
+.pb-0  { padding-bottom: 0 !important; }
+.pb-sm { padding-bottom: var(--base-spacing-unit-sm) !important; }
+.pb-md { padding-bottom: var(--base-spacing-unit) !important; }
+.pb-lg { padding-bottom: var(--base-spacing-unit-lg) !important; }
+
+// .imagelink nur bei xxl (≥1400px)
+.imagelink {
+  @media (max-width: 87.4875em) {
+    display: none;
+  }
+}

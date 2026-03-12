@@ -1,0 +1,76 @@
+// base/article
+
+// Nutshell entfernt bei article--full nur padding-top/bottom, nicht left/right
+.article--full {
+  > .inside {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// Weißer Hintergrund über die volle Artikelbreite
+.article--white {
+  background-color: oklch(100% 0 0);
+}
+
+// --------------------------------------------------
+// .col-6 – Inhaltselemente in 2-spaltigem Grid (50/50)
+// --------------------------------------------------
+.col-6 > .inside {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  // padding-bottom der Blöcke aufheben – Gap übernimmt den Abstand
+  > .block {
+    padding-bottom: 0;
+  }
+
+  // Einzelnes Element über volle Breite spannen
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Mobile (< 550px): 1 Spalte
+@include media-query(screen-xs-max) {
+  .col-6 > .inside {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --------------------------------------------------
+// .col-4 – Inhaltselemente in 3-spaltigem Grid (33/33/33)
+// --------------------------------------------------
+.col-4 > .inside {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .block {
+    padding-bottom: 0;
+  }
+
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Mobile (< 550px): 1 Spalte
+@include media-query(screen-xs-max) {
+  .col-4 > .inside {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Dark Mode: abgedunkelt, klar vom Body (oklch(18%)) abgehoben
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .article--white {
+    background-color: oklch(22% 0.025 255);
+  }
+}
+html[data-color-scheme="dark"] .article--white {
+  background-color: oklch(22% 0.025 255);
+}

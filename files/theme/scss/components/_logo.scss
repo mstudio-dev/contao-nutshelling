@@ -1,0 +1,29 @@
+// components/logo
+
+.logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  a {
+    display: block;
+    outline: none;
+
+    img {
+      display: block;
+      width: 64px;
+      height: auto;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    &:hover img,
+    &:focus-visible img {
+      transform: scale(1.07);
+      filter: brightness(1.12);
+    }
+
+    &:focus-visible img {
+      filter: brightness(1.12) drop-shadow(0 0 6px var(--color-brand-yellow));
+    }
+  }
+}

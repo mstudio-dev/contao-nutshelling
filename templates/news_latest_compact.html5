@@ -1,0 +1,20 @@
+<div class="layout_latest_compact arc_<?= $this->archive->id ?> block<?= $this->class ?>">
+
+  <?php $this->block('info'); ?>
+    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time></p>
+  <?php $this->endblock(); ?>
+
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
+
+  <h2><?= $this->linkHeadline ?></h2>
+
+  <p class="more"><?= $this->more ?></p>
+
+</div>
+
+<?php
+if (!$this->hasReader) {
+    $this->addSchemaOrg($this->getSchemaOrgData());
+}

@@ -1,0 +1,17 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+{% use "@Contao/component/_figure.html.twig" %}
+
+{% block content %}
+<div class="swiper gallery-swiper" data-slides="{{ items_per_row|default(4) }}">
+  <div class="swiper-wrapper">
+    {% for item in images %}
+      <div class="swiper-slide">
+        {% with {figure: item} %}{{ block('figure_component') }}{% endwith %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-pagination"></div>
+</div>
+{% endblock %}

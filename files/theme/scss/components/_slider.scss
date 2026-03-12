@@ -1,0 +1,115 @@
+// components/slider – Swiper
+// Struktur: [id="hero"] > .inside > .mod_article.article--full + .mod_article.hero-text
+
+// H1 als Overlay-Artikel über den Slider (position: absolute)
+[id="hero"] > .inside:has(> .mod_article.article--full + .mod_article.hero-text) {
+  position: relative;
+}
+
+[id="hero"] > .inside > .mod_article.hero-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+
+  > .inside {
+    pointer-events: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: oklch(100% 0 0);
+    text-decoration: none;
+    text-shadow:
+      0 2px 6px oklch(0% 0 0 / 0.7),
+      0 4px 20px oklch(0% 0 0 / 0.5);
+  }
+}
+
+.ce_swiperStart {
+  // Swiper-Themevariablen für Buttons und Pagination
+  --swiper-theme-color:                          var(--color-brand-yellow);
+  --swiper-navigation-color:                     oklch(100% 0 0);
+  --swiper-navigation-size:                      36px;
+  --swiper-pagination-color:                     var(--color-brand-yellow);
+  --swiper-pagination-bullet-inactive-color:     oklch(100% 0 0);
+  --swiper-pagination-bullet-inactive-opacity:   0.5;
+
+  position: relative;
+  overflow: hidden;
+
+  // CI-Dunkelblau-Filter über den gesamten Slider für besseren Kontrast
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: oklch(20% 0.07 255 / 0.35); // --color-brand-blue-dark
+    pointer-events: none;
+  }
+
+  // Buttons und Pagination über dem Filter
+  .swiper-button-prev,
+  .swiper-button-next,
+  .swiper-pagination {
+    z-index: 2;
+  }
+
+  .swiper-slide {
+    figure {
+      position: relative;
+      margin: 0;
+      line-height: 0; // kein Leerzeichen unter img
+    }
+
+    img {
+      width: 100%;
+      max-width: none; // überschreibt nutshell base/shared
+      margin: 0;
+      display: block;
+      height: auto;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem var(--base-spacing-unit);
+      background: oklch(0% 0 0 / 0.45);
+      color: oklch(100% 0 0);
+      font-size: 0.875rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 44px;
+    height: 44px;
+    background: oklch(0% 0 0 / 0.35);
+    border-radius: 50%;
+    transition: background 0.15s ease;
+
+    &::after {
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    &:hover {
+      background: oklch(0% 0 0 / 0.6);
+    }
+  }
+
+  .swiper-pagination {
+    bottom: 0.75rem;
+  }
+}

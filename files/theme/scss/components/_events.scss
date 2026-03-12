@@ -1,0 +1,72 @@
+// components/events – mod_eventlist
+
+// --------------------------------------------------
+// Modul-Überschrift
+// --------------------------------------------------
+.mod_eventlist > h1,
+.mod_eventlist > h2 {
+  margin-bottom: var(--base-spacing-unit);
+}
+
+// --------------------------------------------------
+// layout_upcoming – Terminliste
+// --------------------------------------------------
+.layout_upcoming {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-gray-light);
+
+  &:first-of-type {
+    border-top: 1px solid var(--color-gray-light);
+  }
+
+  time.date {
+    font-size: 0.8125rem;
+    color: var(--color-gray);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  > a {
+    font-size: 0.9375rem;
+    color: var(--color-brand-blue);
+    text-decoration: none;
+    line-height: 1.4;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-brand-blue-light);
+      text-decoration: underline;
+    }
+  }
+
+  // Läuft gerade: linker Akzentbalken + fettes Datum
+  &.current {
+    time.date {
+      font-weight: 600;
+      color: var(--color-brand-blue);
+    }
+
+    > a {
+      font-weight: 600;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Mobile (< 550px): gestapelt
+// --------------------------------------------------
+@include media-query(screen-xs-max) {
+  .layout_upcoming {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    padding: 0.55rem 0;
+
+    time.date {
+      font-size: 0.75rem;
+    }
+  }
+}

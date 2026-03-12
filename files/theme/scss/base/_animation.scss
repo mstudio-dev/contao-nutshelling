@@ -1,0 +1,56 @@
+// base/animation
+//
+// Scroll-Reveal: CSS-Klasse .reveal + Modifier, JS fügt .is-visible hinzu.
+// Im Contao-Backend CSS-Feld am Element/Artikel:
+//   reveal reveal--fade-up   → von unten einblenden (Standard)
+//   reveal reveal--fade-down → von oben einblenden
+//   reveal reveal--fade-left → von rechts einblenden
+//   reveal reveal--fade-right→ von links einblenden
+//   reveal reveal--scale     → heranzoomen
+//   reveal reveal--blur      → Unschärfe auflösen (ideal für Hero/Slider)
+
+// --------------------------------------------------
+// Basis: unsichtbar bis .is-visible
+// --------------------------------------------------
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
+// --------------------------------------------------
+// Modifier – Startposition
+// --------------------------------------------------
+.reveal--fade-up    { transform: translateY(28px); }
+.reveal--fade-down  { transform: translateY(-28px); }
+.reveal--fade-left  { transform: translateX(28px); }
+.reveal--fade-right { transform: translateX(-28px); }
+.reveal--scale      { transform: scale(0.93); }
+.reveal--blur       { filter: blur(8px); transition: opacity 0.7s ease, filter 0.7s ease; }
+
+.reveal--blur.is-visible { filter: blur(0); }
+
+// --------------------------------------------------
+// Verzögerungen (opt-in, z.B. reveal--delay-1)
+// --------------------------------------------------
+.reveal--delay-1 { transition-delay: 0.1s; }
+.reveal--delay-2 { transition-delay: 0.2s; }
+.reveal--delay-3 { transition-delay: 0.35s; }
+
+// --------------------------------------------------
+// Barrierefreiheit: keine Animation bei reduzierter Bewegung
+// --------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none !important;
+    filter: none !important;
+    transition: none;
+  }
+}

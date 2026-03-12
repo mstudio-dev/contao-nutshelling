@@ -1,0 +1,211 @@
+// base/layout
+
+// --------------------------------------------------
+// #header – Logo links, Navigation rechts
+// --------------------------------------------------
+[id="header"] {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background-color: var(--layout-header-background);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.25);
+
+  > .inside {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 0.3em var(--layout-spacing-sides);
+  }
+}
+
+// --------------------------------------------------
+// #header-top – Utility Bar (Kontaktinfo)
+// --------------------------------------------------
+#header-top {
+  background-color: var(--color-brand-blue-dark);
+  color: var(--color-text-inverted);
+  // font-size bewusst NICHT hier – sonst berechnet sich wrapper-max em relativ
+  // zur kleineren Schriftgröße und .inside wird schmaler als [id="header"]>.inside
+
+  > .inside {
+    @include wrapper-max;
+    @include padding-default;
+    display: flex;
+    align-items: center;
+  }
+
+  // ul: flex-Zeile mit den Kontakteinträgen
+  > .inside > ul {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.25rem;
+    padding-block: 0.4rem;
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0.8125rem; // hier gesetzt, damit em-Berechnung von wrapper-max unberührt bleibt
+  }
+
+  // li: Icon + Text nebeneinander
+  > .inside > ul > li {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  // Font Awesome Icons via ::before (kein HTML-Eingriff nötig)
+  > .inside > ul > li::before {
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.8em;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+
+  > .inside > ul > li:nth-child(1)::before { content: "\f0db"; } // fa-table-columns – Orgaboard
+  > .inside > ul > li:nth-child(2)::before { content: "\f095"; } // fa-phone – Tel.
+  > .inside > ul > li:nth-child(3)::before { content: "\f897"; } // fa-voicemail – AB Krankmeldung
+  > .inside > ul > li:nth-child(4)::before { content: "\f0e0"; } // fa-envelope – E-Mail
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+
+  @include media-query(screen-sm-max) {
+    > .inside > ul {
+      justify-content: flex-start;
+      gap: 0.35rem;
+      padding-block: 0.35rem;
+    }
+
+    > .inside > ul > li {
+      position: relative;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: oklch(100% 0 0 / 0.12);
+      overflow: hidden;
+      font-size: 0;
+
+      &::before {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        opacity: 1;
+      }
+
+      a {
+        position: absolute;
+        inset: 0;
+        font-size: 0;
+
+        &:focus-visible {
+          outline: 2px solid var(--color-brand-yellow);
+          outline-offset: 2px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// DARK-MODE-TOGGLE (.theme-toggle, per JS in #header-top eingefügt)
+// --------------------------------------------------
+@keyframes theme-icon-spin {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.3); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: none;
+  background: oklch(100% 0 0 / 0.1);
+  color: var(--color-text-inverted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+
+  &::before {
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 0.8rem;
+    content: '\f186'; // moon – zeigt: jetzt hell, klick = dunkel
+    display: block;
+  }
+
+  &.is-spinning::before {
+    animation: theme-icon-spin 0.4s ease;
+  }
+
+  &:hover {
+    background: oklch(100% 0 0 / 0.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-yellow);
+    outline-offset: 2px;
+  }
+}
+
+// Im Darkmode: Sonne anzeigen (klick = hell)
+html[data-color-scheme="dark"] .theme-toggle::before {
+  content: '\f185'; // sun
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .theme-toggle::before {
+    content: '\f185'; // sun
+  }
+}
+
+// Mobile: Toggle ebenfalls als Kreis in Icon-Reihe
+@include media-query(screen-sm-max) {
+  .theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-left: 0.35rem;
+  }
+}
+
+// --------------------------------------------------
+// #footer
+// --------------------------------------------------
+[id="footer"] {
+  > .inside {
+    @include wrapper-max;
+    @include padding-default;
+    padding-top: var(--article-spacing-top);
+    padding-bottom: var(--article-spacing-bottom);
+  }
+
+  a {
+    color: oklch(85% 0.02 255);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: oklch(100% 0 0);
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+// components/accordion – content-accordion (handorgel, Contao 5.3+)
+
+.content-accordion {
+  // --------------------------------------------------
+  // h2-Overrides: volle Breite + kein Underline
+  // --------------------------------------------------
+  .handorgel__header {
+    display: block;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: var(--base-line-height);
+
+    &::after {
+      display: none;
+    }
+  }
+
+  // --------------------------------------------------
+  // Header-Button: Chevron + border-radius + focus-fix
+  // --------------------------------------------------
+  .handorgel__header__button {
+    border-radius: var(--base-border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    transition: background 0.15s ease;
+
+    // Chevron-Icon rechts (FA)
+    &::after {
+      content: '\f078'; // fa-chevron-down
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      font-size: 0.75em;
+      margin-left: auto;
+      padding-left: 0.75em;
+      flex-shrink: 0;
+      align-self: center;
+      transition: transform 0.2s ease;
+    }
+
+    // Geöffnet: Chevron dreht sich, obere Ecken gerade
+    &[aria-expanded="true"] {
+      border-radius: var(--base-border-radius) var(--base-border-radius) 0 0;
+
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    // Hover
+    &:hover {
+      background: var(--color-brand-blue-light);
+      color: var(--color-text-inverted);
+    }
+
+    // Focus-Outline (Nutshell setzt outline: 0 — hier überschreiben)
+    &:focus-visible {
+      outline: 2px solid var(--color-brand-yellow);
+      outline-offset: 2px;
+    }
+  }
+
+  // --------------------------------------------------
+  // Content: heller Hintergrund, untere Ecken rund
+  // --------------------------------------------------
+  .handorgel__content {
+    border-radius: 0 0 var(--base-border-radius) var(--base-border-radius);
+
+    > div {
+      background: oklch(97% 0.005 255);
+    }
+  }
+}
+
+// --------------------------------------------------
+// Dark Mode
+// --------------------------------------------------
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .content-accordion .handorgel__content > div {
+    background: oklch(24% 0.02 255);
+  }
+}
+html[data-color-scheme="dark"] .content-accordion .handorgel__content > div {
+  background: oklch(24% 0.02 255);
+}

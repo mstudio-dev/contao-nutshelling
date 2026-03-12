@@ -1,0 +1,59 @@
+{% extends "@Contao/frontend_module/_base.html.twig" %}
+
+{% block content %}
+<details class="newsmenu-dropdown">
+  <summary class="newsmenu-dropdown__trigger">Archiv</summary>
+  <div class="newsmenu-dropdown__panel">
+
+    {% if items is empty %}
+      <p class="empty">{{ empty }}</p>
+
+    {% elseif yearly %}
+      <ul class="level_1">
+        {% for item in items %}
+          {% if item.isActive %}
+            <li class="active">
+              <strong class="active">{{ item.link }}{% if showQuantity %} ({{ item.quantity }}){% endif %}</strong>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ item.href }}" title="{{ item.title }}">
+                {{ item.link }}{% if showQuantity %} ({{ item.quantity }}){% endif %}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+    {% else %}
+      <ul class="level_1">
+        {% for year, months in items %}
+          <li class="year submenu">
+            {% if year == activeYear %}
+              <strong class="active">{{ year }}</strong>
+            {% else %}
+              <a href="{{ url }}year={{ year }}">{{ year }}</a>
+            {% endif %}
+            <ul class="level_2">
+              {% for month in months %}
+                {% if month.isActive %}
+                  <li class="active">
+                    <strong class="active">{{ month.link }}{% if showQuantity %} ({{ month.quantity }}){% endif %}</strong>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{{ month.href }}" title="{{ month.title }}">
+                      {{ month.link }}{% if showQuantity %} ({{ month.quantity }}){% endif %}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+  </div>
+</details>
+{% endblock %}

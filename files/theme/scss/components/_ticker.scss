@@ -1,0 +1,41 @@
+// components/ticker
+// Struktur: section.mod_ticker > div.tickertext.telex > div.telex-head
+// Überschreibt: do-while/contao-ticker-bundle/public/style.css
+
+.mod_ticker {
+  background-color: var(--color-brand-blue-dark);
+  color: var(--color-text-inverted);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  white-space: nowrap;
+
+  // Bundle-Default (#eee) überschreiben
+  .tickertext {
+    display: flex;
+    align-items: center;
+    padding-block: 0.65rem;
+    background-color: transparent;
+  }
+
+  // Alle msg-*-Hintergrundfarben des Bundles zurücksetzen
+  [class*="msg-"] {
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+
+  // Jede Meldung: Uppercase + +++ als Trenner via ::before/::after
+  .telex-head {
+    text-transform: uppercase;
+    flex-shrink: 0;
+    padding: 0 0.75em;
+
+    &::before,
+    &::after {
+      content: ' +++ ';
+      opacity: 0.55;
+    }
+  }
+}

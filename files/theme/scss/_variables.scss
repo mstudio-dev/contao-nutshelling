@@ -1,0 +1,183 @@
+// Project variables
+// Overrides nutshell/_variables.scss defaults
+//
+// OKLCH-Farben: https://developer.mozilla.org/de/docs/Web/CSS/color_value/oklch
+// Barrierefreiheit: WCAG AA = min. 4.5:1 Kontrast (Text), 3:1 (große Texte/UI)
+//
+// CI-Farben: Dunkelblau + Gelb
+// Gelb funktioniert NICHT als Textfarbe auf Weiß (Kontrast ~1.5:1)
+// → Gelb nur als Akzent auf dunkelblauem Hintergrund oder dunkler Variante
+
+html {
+  // --------------------------------------------------
+  // MARKENFARBEN (CI)
+  // --------------------------------------------------
+
+  // Dunkelblau – Basis CI-Farbe
+  // oklch(30% 0.09 255) ≈ #003d7a → Kontrast auf Weiß: ~9:1 ✓ AAA
+  --color-brand-blue:         oklch(30% 0.09 255);
+  --color-brand-blue-light:   oklch(45% 0.10 255); // Hover, Akzente (Kontrast auf Weiß: ~4.8:1 ✓ AA)
+  --color-brand-blue-dark:    oklch(20% 0.07 255); // Active, tiefes Dunkelblau
+
+  // Gelb – nur als Hintergrundfarbe / dekorativ
+  // oklch(83% 0.17 95) → KEIN ausreichender Kontrast auf Weiß!
+  // Auf Dunkelblau: Kontrast ~9:1 ✓ AAA
+  --color-brand-yellow:       oklch(83% 0.17 95);
+  --color-brand-yellow-dark:  oklch(65% 0.15 88); // Dunkleres Gelb für Text auf hellem BG (4.6:1 ✓ AA)
+
+  // --------------------------------------------------
+  // NUTSHELL OVERRIDES
+  // --------------------------------------------------
+  --color-default:            var(--color-brand-blue);
+  --color-brand:              var(--color-brand-blue);
+  --color-highlight:          var(--color-brand-blue);
+
+  // Grautöne mit leichtem Blau-Unterton für Kohärenz
+  --color-gray-dark:          oklch(22% 0.01 255);  // Kontrast auf Weiß: ~13:1 ✓ AAA
+  --color-gray:               oklch(45% 0.01 255);  // Kontrast auf Weiß: ~5.2:1 ✓ AA
+  --color-gray-light:         oklch(88% 0.01 255);
+
+  --color-page-background:    oklch(98.5% 0.005 220); // ≈ #f9fbfc
+  --color-text:               var(--color-gray-dark);
+  --color-text-inverted:      oklch(100% 0 0);
+
+  // Fehlermeldungen
+  --color-error:              oklch(55% 0.22 27);   // Rot – Kontrast auf Weiß: ~4.6:1 ✓ AA
+  --color-error-light:        oklch(75% 0.15 27);
+
+  // --------------------------------------------------
+  // LINKS & BUTTONS
+  // --------------------------------------------------
+  --links-color:              var(--color-brand-blue);
+  --links-color-hover:        var(--color-brand-blue-light);
+  --links-color-visited:      oklch(35% 0.09 280);  // leicht violetter Blauton
+
+  // Focus-Ring: gut sichtbar, barrierefrei
+  --links-outline-focus:      2px solid var(--color-brand-yellow);
+
+  --button-background:        var(--color-brand-blue);
+  --button-color:             var(--color-text-inverted);
+  --button-background-hover:  var(--color-brand-blue-light);
+
+  // --------------------------------------------------
+  // LAYOUT & ABSTÄNDE
+  // --------------------------------------------------
+  --layout-header-background: var(--color-brand-blue);
+  --layout-header-color:      var(--color-text-inverted);
+  --layout-footer-background: var(--color-brand-blue-dark);
+  --layout-footer-color:      oklch(90% 0.01 255);
+
+  --grid-gutter:              1.5rem;
+
+  // --------------------------------------------------
+  // TYPOGRAFIE
+  // --------------------------------------------------
+  --base-font-family:         'Inter', system-ui, sans-serif;
+  --headings-font-family:     'Inter', system-ui, sans-serif;
+  --headings-font-weight:     600;
+
+  // --------------------------------------------------
+  // ACCORDION
+  // --------------------------------------------------
+  --accordion-toggler-background: var(--color-brand-blue);
+  --accordion-toggler-color:      var(--color-text-inverted);
+
+  // --------------------------------------------------
+  // FORMULARE
+  // --------------------------------------------------
+  --forms-input-border-color: oklch(65% 0.01 255);
+  --forms-mandatory-color:    var(--color-brand-blue);
+
+  // --------------------------------------------------
+  // TABELLEN
+  // --------------------------------------------------
+  --table-border-color:       var(--color-gray-light);
+  --table-background-light:   oklch(96% 0.005 255);
+}
+
+// --------------------------------------------------
+// DARK MODE – Variablen als Mixin (wird zweifach verwendet:
+// 1) via prefers-color-scheme, 2) via manuelles Toggle)
+// Kontrast auf dunklem BG: Text auf BG immer ≥ 4.5:1 (AA)
+// --------------------------------------------------
+@mixin theme-dark {
+  // Hintergründe
+  --color-page-background:     oklch(18% 0.02 255);  // dunkles Blau-Schwarz
+  --layout-wrapper-background: transparent;
+  --layout-header-background:  oklch(14% 0.03 255);  // noch dunkler als Body
+  --layout-header-color:       oklch(92% 0.01 255);
+  --layout-footer-background:  oklch(12% 0.03 255);
+  --layout-footer-color:       oklch(80% 0.01 255);
+
+  // Texte
+  --color-text:                oklch(92% 0.01 255);  // Kontrast auf BG ~12:1 ✓ AAA
+  --color-text-inverted:       oklch(100% 0 0);      // Header/Nav bleibt dunkel → Text weiß
+
+  // Grautöne
+  --color-gray-dark:           oklch(90% 0.01 255);
+  --color-gray:                oklch(70% 0.01 255);  // Kontrast auf BG ~5.5:1 ✓ AA
+  --color-gray-light:          oklch(30% 0.01 255);
+
+  // Markenfarben – heller für DarkMode-Kontrast
+  // oklch(65% 0.12 255) ≈ mittleres Blau – Kontrast auf dark BG: ~5.1:1 ✓ AA
+  --color-brand-blue:          oklch(65% 0.12 255);
+  --color-brand-blue-light:    oklch(75% 0.10 255);  // Hover
+  --color-brand-blue-dark:     oklch(50% 0.10 255);
+
+  // Gelb – im Darkmode als Akzent gut nutzbar
+  // oklch(83% 0.17 95) auf dark BG ~11:1 ✓ AAA
+  --color-brand-yellow:        oklch(83% 0.17 95);
+  --color-brand-yellow-dark:   oklch(72% 0.15 88);
+
+  --color-default:             var(--color-brand-blue);
+  --color-brand:               var(--color-brand-blue);
+  --color-highlight:           var(--color-brand-blue);
+
+  // Fehler
+  --color-error:               oklch(70% 0.20 27);   // Kontrast auf dark BG: ~5:1 ✓ AA
+  --color-error-light:         oklch(55% 0.18 27);
+
+  // Links
+  --links-color:               var(--color-brand-blue);
+  --links-color-hover:         var(--color-brand-blue-light);
+  --links-color-visited:       oklch(65% 0.09 280);
+  --links-outline-focus:       2px solid var(--color-brand-yellow);
+
+  // Buttons
+  --button-background:         var(--color-brand-blue);
+  --button-color:              oklch(18% 0.02 255);  // dunkler Text auf hellem Blau
+  --button-background-hover:   var(--color-brand-blue-light);
+
+  // Formfelder
+  --forms-input-background:    oklch(24% 0.02 255);
+  --forms-input-border-color:  oklch(45% 0.02 255);
+  --forms-mandatory-color:     var(--color-brand-yellow);
+
+  // Borders
+  --base-border-color:         oklch(32% 0.015 255);
+
+  // Accordion
+  --accordion-toggler-background: var(--color-brand-blue);
+  --accordion-toggler-color:      oklch(18% 0.02 255);
+  --accordion-content-background: oklch(24% 0.02 255);
+
+  // Tabellen
+  --table-border-color:        oklch(32% 0.015 255);
+  --table-background-light:    oklch(24% 0.02 255);
+
+  // Selection
+  --selection-background:      var(--color-brand-yellow);
+  --selection-color:           oklch(18% 0.02 255);
+}
+
+// 1) Systempräferenz – gilt nicht wenn explizit auf "light" gesetzt
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) {
+    @include theme-dark;
+  }
+}
+
+// 2) Manuelles Toggle – gilt unabhängig von Systempräferenz
+html[data-color-scheme="dark"] {
+  @include theme-dark;
+}

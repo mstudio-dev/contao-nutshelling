@@ -1,0 +1,37 @@
+{% extends "@Contao/frontend_module/_base.html.twig" %}
+
+{% block content %}
+  {% for category in faq %}
+    <article class="faq-article">
+      <h2>{{ category.headline }}</h2>
+
+      {% for item in category.items %}
+        <details class="faq-item" id="{{ item.alias }}">
+          <summary class="faq-question">
+            <span>{{ item.question }}</span>
+          </summary>
+
+          <div class="faq-answer">
+            <div class="ce_text block">
+              {{ item.answer|raw }}
+            </div>
+
+            {% if item.enclosure %}
+              <ul class="enclosure">
+                {% for enclosure in item.enclosure %}
+                  <li class="download-element ext-{{ enclosure.extension }}">
+                    <a href="{{ enclosure.href }}" title="{{ enclosure.title }}">{{ enclosure.link }} <span class="size">({{ enclosure.filesize }})</span></a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <p class="info">{{ item.info }}</p>
+          </div>
+        </details>
+      {% endfor %}
+
+      <p class="toplink"><a href="#top">{{ topLink }}</a></p>
+    </article>
+  {% endfor %}
+{% endblock %}

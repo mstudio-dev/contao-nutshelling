@@ -1,0 +1,211 @@
+// components/downloads – content-downloads
+
+.content-downloads,
+.content-download {
+  // Card
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+  padding: 1.25rem;
+
+  // --------------------------------------------------
+  // Überschrift: fa-download Icon + kein Underline
+  // --------------------------------------------------
+  h2, h3, h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-brand-blue);
+    margin-bottom: 0.75rem;
+
+    &::before {
+      content: '\f019'; // fa-download
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      font-size: 0.9em;
+      flex-shrink: 0;
+    }
+
+    &::after {
+      display: none; // kein gelbes Underline
+    }
+  }
+
+  // --------------------------------------------------
+  // Liste: kein Bullet, Icon via ::before
+  // --------------------------------------------------
+  ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .download-element {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--color-gray-light);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    // Icon: FA, Größe fix, Farbe nach Typ
+    &::before {
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      font-size: 1.1em;
+      flex-shrink: 0;
+      width: 1.25em;
+      text-align: center;
+      content: '\f15b'; // fa-file (Default)
+      color: var(--color-gray);
+    }
+
+    a {
+      color: var(--color-brand-blue);
+      text-decoration: none;
+      font-size: 0.9375rem;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+    }
+
+    // mime_icon ausblenden (Nutshell Fallback)
+    .mime_icon { display: none; }
+  }
+
+  // --------------------------------------------------
+  // Dateityp-Icons + Farben
+  // --------------------------------------------------
+  .ext-pdf::before   { content: '\f1c1'; color: oklch(55% 0.22 27); }       // fa-file-pdf, rot
+
+  .ext-doc::before,
+  .ext-docx::before  { content: '\f1c2'; color: var(--color-brand-blue); }  // fa-file-word
+
+  .ext-xls::before,
+  .ext-xlsx::before  { content: '\f1c3'; color: oklch(50% 0.15 145); }      // fa-file-excel, grün
+
+  .ext-ppt::before,
+  .ext-pptx::before  { content: '\f1c4'; color: oklch(65% 0.18 50); }       // fa-file-powerpoint, orange
+
+  .ext-jpg::before,
+  .ext-jpeg::before,
+  .ext-png::before,
+  .ext-gif::before,
+  .ext-svg::before,
+  .ext-webp::before  { content: '\f1c5'; color: oklch(55% 0.12 200); }      // fa-file-image, teal
+
+  .ext-zip::before,
+  .ext-rar::before,
+  .ext-gz::before,
+  .ext-7z::before    { content: '\f1c6'; color: var(--color-gray); }        // fa-file-zipper
+
+  .ext-mp3::before,
+  .ext-wav::before,
+  .ext-ogg::before   { content: '\f1c7'; color: oklch(50% 0.12 290); }      // fa-file-audio, lila
+
+  .ext-mp4::before,
+  .ext-avi::before,
+  .ext-mov::before   { content: '\f1c8'; color: oklch(50% 0.12 290); }      // fa-file-video, lila
+
+  .ext-txt::before,
+  .ext-csv::before   { content: '\f15c'; color: var(--color-gray); }        // fa-file-lines
+}
+
+// --------------------------------------------------
+// Einzelelement: .content-download.download-element
+// ext-Klasse und download-element auf demselben Element
+// --------------------------------------------------
+.content-download.download-element {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  &::before {
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    font-size: 1.1em;
+    flex-shrink: 0;
+    width: 1.25em;
+    text-align: center;
+    content: '\f15b'; // fa-file (Default)
+    color: var(--color-gray);
+  }
+
+  a {
+    color: var(--color-brand-blue);
+    text-decoration: none;
+    font-size: 0.9375rem;
+
+    &::after {
+      content: '\f019'; // fa-download
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      font-size: 0.8em;
+      margin-left: 0.4em;
+      opacity: 0.6;
+    }
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ext-* Icons auf dem Wrapper selbst
+.content-download.ext-pdf::before   { content: '\f1c1'; color: oklch(55% 0.22 27); }
+
+.content-download.ext-doc::before,
+.content-download.ext-docx::before  { content: '\f1c2'; color: var(--color-brand-blue); }
+
+.content-download.ext-xls::before,
+.content-download.ext-xlsx::before  { content: '\f1c3'; color: oklch(50% 0.15 145); }
+
+.content-download.ext-ppt::before,
+.content-download.ext-pptx::before  { content: '\f1c4'; color: oklch(65% 0.18 50); }
+
+.content-download.ext-jpg::before,
+.content-download.ext-jpeg::before,
+.content-download.ext-png::before,
+.content-download.ext-gif::before,
+.content-download.ext-svg::before,
+.content-download.ext-webp::before  { content: '\f1c5'; color: oklch(55% 0.12 200); }
+
+.content-download.ext-zip::before,
+.content-download.ext-rar::before,
+.content-download.ext-gz::before,
+.content-download.ext-7z::before    { content: '\f1c6'; color: var(--color-gray); }
+
+.content-download.ext-mp3::before,
+.content-download.ext-wav::before,
+.content-download.ext-ogg::before   { content: '\f1c7'; color: oklch(50% 0.12 290); }
+
+.content-download.ext-mp4::before,
+.content-download.ext-avi::before,
+.content-download.ext-mov::before   { content: '\f1c8'; color: oklch(50% 0.12 290); }
+
+.content-download.ext-txt::before,
+.content-download.ext-csv::before   { content: '\f15c'; color: var(--color-gray); }
+
+// --------------------------------------------------
+// Dark Mode
+// --------------------------------------------------
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .content-downloads,
+  html:not([data-color-scheme="light"]) .content-download {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+  }
+}
+html[data-color-scheme="dark"] .content-downloads,
+html[data-color-scheme="dark"] .content-download {
+  background: oklch(27% 0.025 255);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+}

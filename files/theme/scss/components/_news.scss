@@ -1,0 +1,412 @@
+// components/news
+
+// --------------------------------------------------
+// Sektion-Überschrift (.content-headline)
+// --------------------------------------------------
+// Gelbe Linie nur opt-in: im Contao-Backend CSS-Klasse "headline--line" eintragen
+.content-headline.headline--line {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--base-spacing-unit);
+  padding-bottom: 0.3rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-brand-yellow);
+    border-radius: 2px;
+  }
+}
+
+// --------------------------------------------------
+// News-Templates: kein gelbes h2-Underline
+// --------------------------------------------------
+.layout_latest,
+.layout_latest_compact,
+.layout_short,
+.layout_simple {
+  h2::after {
+    display: none;
+  }
+}
+
+// --------------------------------------------------
+// Newslist: folgt .news-grid (Nutshell-Variablen)
+// --------------------------------------------------
+.mod_newslist {
+  display: grid;
+  gap: var(--grid-gutter);
+  margin-bottom: var(--base-spacing-unit-lg);
+
+  // Modulüberschrift direkt im Grid: volle Breite über alle Spalten
+  > h1, > h2, > h3, > h4 {
+    grid-column: 1 / -1;
+  }
+
+  @include media-query(screen-sm) {
+    grid-template-columns: repeat(var(--news-grid-columns-sm), 1fr);
+  }
+
+  @include media-query(screen-md) {
+    grid-template-columns: repeat(var(--news-grid-columns-md), 1fr);
+  }
+
+  @include media-query(screen-lg) {
+    grid-template-columns: repeat(var(--news-grid-columns-lg), 1fr);
+  }
+
+  @include media-query(screen-xl) {
+    grid-template-columns: repeat(var(--news-grid-columns-xl), 1fr);
+  }
+}
+
+// --------------------------------------------------
+// News-Karte: gemeinsame Basis (alle Varianten)
+// --------------------------------------------------
+.layout_latest,
+.layout_latest_compact,
+.layout_short,
+.layout_simple {
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 6px 24px oklch(0% 0 0 / 0.18);
+  }
+}
+
+// --------------------------------------------------
+// .layout_latest + .layout_latest_compact: mit Bild-Overlay
+// --------------------------------------------------
+.layout_latest,
+.layout_latest_compact {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+
+  // Bild + Info teilen dieselbe Grid-Zelle (row 1)
+  // .image_container = html5-Template, figure = Twig-Template
+  .image_container,
+  > figure {
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0;
+    line-height: 0;
+
+    a { display: block; }
+
+    img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // Meta: Overlay am unteren Bildrand
+  .info {
+    grid-row: 1;
+    grid-column: 1;
+    align-self: end;
+    z-index: 1;
+    margin: 0;
+    padding: 1.5rem 0.875rem 0.5rem;
+    font-size: 0.75rem;
+    color: oklch(100% 0 0);
+    background: linear-gradient(to top, oklch(0% 0 0 / 0.6) 0%, transparent 100%);
+
+    &::before {
+      font-family: "Font Awesome 7 Free";
+      font-weight: 400;
+      content: "\f017";
+      margin-right: 0.35em;
+    }
+  }
+
+  // Überschrift
+  h2 {
+    grid-row: 2;
+    grid-column: 1;
+    font-size: 1rem;
+    line-height: 1.35;
+    margin: 0.75rem 1rem 0;
+
+    a {
+      color: var(--color-brand-blue);
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-brand-blue-light);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Teasertext
+  .ce_text {
+    grid-row: 3;
+    grid-column: 1;
+    font-size: 0.9375rem;
+    padding: 0.4rem 1rem 0;
+    align-self: start;
+
+    p:last-child { margin-bottom: 0; }
+  }
+
+  // Weiterlesen-Link
+  .more {
+    grid-row: 4;
+    grid-column: 1;
+    margin: 0.75rem 1rem 1rem;
+    padding: 0;
+
+    a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-brand-blue);
+      text-decoration: none;
+
+      &::after {
+        display: inline-block;
+        font-family: "Font Awesome 7 Free";
+        font-weight: 900;
+        content: "\f054";
+        margin-left: 0.35em;
+        font-size: 0.75em;
+        transition: transform 0.2s ease;
+      }
+
+      .invisible { display: none; }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-brand-blue-light);
+        text-decoration: underline;
+
+        &::after { transform: translateX(3px); }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Featured-Badge: gelber Stern rechts oben über dem Bild
+// --------------------------------------------------
+.featured {
+  figure,
+  .image_container {
+    position: relative;
+
+    &::before {
+      content: '\f005';
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 2;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--color-brand-yellow);
+      color: oklch(20% 0.07 255);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px oklch(0% 0 0 / 0.4);
+    }
+  }
+}
+
+// --------------------------------------------------
+// .layout_short: kein Bild, normales Info
+// --------------------------------------------------
+.layout_short {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  .info {
+    font-size: 0.8125rem;
+    color: var(--color-gray);
+    margin: 0 0 0.4rem;
+    padding: 0;
+  }
+
+  h2 {
+    font-size: 1rem;
+    line-height: 1.35;
+    margin: 0 0 0.4rem;
+
+    a {
+      color: var(--color-brand-blue);
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-brand-blue-light);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .ce_text {
+    font-size: 0.9375rem;
+    flex: 1;
+
+    p:last-child { margin-bottom: 0; }
+  }
+
+  .more {
+    margin-top: 0.75rem;
+
+    a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-brand-blue);
+      text-decoration: none;
+
+      &::after {
+        display: inline-block;
+        font-family: "Font Awesome 7 Free";
+        font-weight: 900;
+        content: "\f054";
+        margin-left: 0.35em;
+        font-size: 0.75em;
+        transition: transform 0.2s ease;
+      }
+
+      .invisible { display: none; }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-brand-blue-light);
+        text-decoration: underline;
+
+        &::after { transform: translateX(3px); }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// .layout_simple: Zeit + Link nebeneinander
+// --------------------------------------------------
+.layout_simple {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+
+  time {
+    font-size: 0.8125rem;
+    color: var(--color-gray);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  a {
+    color: var(--color-brand-blue);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-brand-blue-light);
+      text-decoration: underline;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Dark Mode: News-Karten abdunkeln, heller als article--white (oklch(22%))
+// --------------------------------------------------
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) {
+    .layout_latest,
+    .layout_latest_compact,
+    .layout_short,
+    .layout_simple {
+      background: oklch(27% 0.025 255);
+      box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+
+      &:hover {
+        box-shadow: 0 6px 24px oklch(0% 0 0 / 0.5);
+      }
+    }
+  }
+}
+html[data-color-scheme="dark"] {
+  .layout_latest,
+  .layout_latest_compact,
+  .layout_short,
+  .layout_simple {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+
+    &:hover {
+      box-shadow: 0 6px 24px oklch(0% 0 0 / 0.5);
+    }
+  }
+}
+
+// --------------------------------------------------
+// Scroll-Reveal: automatisch für alle News-Karten
+// --------------------------------------------------
+.layout_latest,
+.layout_latest_compact,
+.layout_short,
+.layout_simple {
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.2s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
+// Startpositionen (unterschiedlich je Layout)
+.layout_latest         { transform: translateY(28px); }
+.layout_latest_compact { transform: translateY(24px); }
+.layout_short          { transform: translateX(20px); }
+.layout_simple         { transform: translateY(14px); }
+
+// Staggering im Grid: 2. und 3. Karte leicht verzögert
+.mod_newslist {
+  .layout_latest:nth-child(2),
+  .layout_latest_compact:nth-child(2),
+  .layout_short:nth-child(2) { transition-delay: 0.1s; }
+
+  .layout_latest:nth-child(3),
+  .layout_latest_compact:nth-child(3),
+  .layout_short:nth-child(3) { transition-delay: 0.2s; }
+}
+
+// Barrierefreiheit: keine Animation
+@media (prefers-reduced-motion: reduce) {
+  .layout_latest,
+  .layout_latest_compact,
+  .layout_short,
+  .layout_simple {
+    opacity: 1;
+    transform: none !important;
+    transition: box-shadow 0.2s ease;
+  }
+}
+
+// --------------------------------------------------
+// „Alle Neuigkeiten"-Link: News-spezifische Overrides
+// --------------------------------------------------
+.mod_newslist .content-hyperlink {
+  text-align: right;
+  margin-top: calc(-1 * var(--base-spacing-unit));
+}

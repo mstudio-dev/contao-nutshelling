@@ -1,0 +1,17 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
+<div class="layout_latest_compact arc_{{ archive.id }} block{{ class }}">
+
+  {% block info %}
+    <p class="info"><time datetime="{{ datetime }}">{{ date }}</time></p>
+  {% endblock %}
+
+  {% if addImage and figure is defined %}
+    {% with {figure: figure} %}{{ block('figure_component') }}{% endwith %}
+  {% endif %}
+
+  <h2>{{ linkHeadline|raw }}</h2>
+
+  <p class="more">{{ more|raw }}</p>
+
+</div>

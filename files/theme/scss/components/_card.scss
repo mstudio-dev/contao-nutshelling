@@ -1,0 +1,130 @@
+// components/card
+
+// --------------------------------------------------
+// Parallax-Karten-Sektion
+// --------------------------------------------------
+.parallax-cards {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+
+  // Hintergrundbild: absolut positioniert, überdimensioniert als Puffer für JS-Parallax
+  &__bg {
+    position: absolute;
+    inset: -25% 0;
+    z-index: 0;
+    will-change: transform;
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  // Dunkler Filter über dem Hintergrundbild
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: oklch(0% 0 0 / 0.4);
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    @include wrapper-max;
+    @include padding-default;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--grid-gutter);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    @include media-query(screen-md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.parallax-card {
+  display: block;
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 4px 16px oklch(0% 0 0 / 0.3);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px oklch(0% 0 0 / 0.45);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// --------------------------------------------------
+// ce_card – Contao Card-Element
+// --------------------------------------------------
+.ce_card {
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+  padding: 1.25rem;
+  height: 100%; // in col-4/col-6: volle Spalthöhe
+
+  .card__image {
+    margin: -1.25rem -1.25rem 1.25rem; // Card-Padding negieren → randlos
+    overflow: hidden;
+    border-radius: var(--base-border-radius) var(--base-border-radius) 0 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .card__headline {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-brand-blue);
+    margin-bottom: 0.75rem;
+
+    &::after {
+      display: none; // kein gelbes Underline
+    }
+  }
+
+  .card__description {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text);
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Dark Mode
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .ce_card {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+  }
+}
+html[data-color-scheme="dark"] .ce_card {
+  background: oklch(27% 0.025 255);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+}

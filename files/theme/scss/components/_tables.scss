@@ -1,0 +1,103 @@
+// components/tables
+
+// --------------------------------------------------
+// .content-table – Basis-Styling
+// --------------------------------------------------
+.content-table {
+  h2, h3, h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--color-gray-light);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:nth-child(odd) {
+      background: oklch(97% 0.005 255);
+    }
+  }
+
+  th, td {
+    padding: 0.55rem 0.9rem;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  // Zeilenkopf (th[scope="row"]): Label-Spalte, CI-Blau
+  th[scope="row"] {
+    font-weight: 700;
+    color: var(--color-brand-blue);
+    white-space: nowrap;
+    width: 1%; // so schmal wie nötig
+    padding-right: 1.5rem;
+  }
+
+  // Kopfzeile (thead): CI-Dunkelblau, weißer Text
+  thead tr {
+    background: var(--color-brand-blue);
+
+    th {
+      color: oklch(100% 0 0);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-bottom: none;
+    }
+  }
+}
+
+// Dark Mode
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .content-table tbody tr:nth-child(odd) {
+    background: oklch(24% 0.02 255);
+  }
+}
+html[data-color-scheme="dark"] .content-table tbody tr:nth-child(odd) {
+  background: oklch(24% 0.02 255);
+}
+
+// --------------------------------------------------
+// .content-table.definition – Definition-List-Optik (Begriff + Beschreibung)
+// Tabelle ohne Rahmen, erste Spalte als Term (blau, fett, schmal)
+// --------------------------------------------------
+.content-table.definition {
+  table {
+    border: none;
+
+    td, th {
+      border: none;
+      padding: 0.6rem 1rem 0.6rem 0;
+      vertical-align: top;
+    }
+
+    tr {
+      border-bottom: 1px solid var(--color-gray-light);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    // Erste Spalte: Begriff
+    td:first-child,
+    th:first-child {
+      width: 9rem;
+      min-width: 9rem;
+      font-weight: 700;
+      color: var(--color-brand-blue);
+      white-space: nowrap;
+      padding-right: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+# Contao / Symfony
+var/cache/
+var/logs/
+var/backups/
+var/deferred-images/
+var/nc_bulky_items/
+var/jwt_secret
+
+# Vendor (Composer)
+vendor/
+
+# Contao managed dirs (symlinked into public)
+public/assets/
+public/bundles/
+public/files/
+public/share/
+public/system/
+public/vendor/
+
+# Assets: Composer-/Bundle-Abhängigkeiten, nur kompiliertes CSS tracken
+assets/ace/
+assets/chosen/
+assets/colorbox/
+assets/colorpicker/
+assets/contao/
+assets/contao-component-fontawesome-free/
+assets/datepicker/
+assets/dropzone/
+assets/handorgel/
+assets/images/
+assets/jquery/
+assets/jquery-ui/
+assets/js/
+assets/mediabox/
+assets/mootools/
+assets/nutshell/
+assets/simplemodal/
+assets/swipe/
+assets/swiper/
+assets/tablesort/
+assets/tablesorter/
+assets/tinymce4/
+assets/tristen-tablesort/
+
+# Contao Uploaded/managed files (nicht Theme)
+files/AutoBackupDB/
+files/ms-landau/
+
+# Database dumps
+*.sql
+*.sql.gz
+
+# OS / Editor
+.DS_Store
+.idea/
+*.swp
+
