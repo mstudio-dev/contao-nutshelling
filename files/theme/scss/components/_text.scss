@@ -1,15 +1,11 @@
 // components/text
 
-// --------------------------------------------------
 // .content-text – Lesezeilenbreite begrenzen
-// --------------------------------------------------
 .content-text {
   max-width: 45rem;
 }
 
-// --------------------------------------------------
 // .content-description-list.school-meta – Info-Leiste
-// --------------------------------------------------
 .content-description-list.school-meta {
   padding: 0.75rem 1rem;
   margin-bottom: var(--base-spacing-unit);
@@ -68,9 +64,48 @@ html[data-color-scheme="dark"] .content-description-list.school-meta {
   background: oklch(27% 0.025 255);
 }
 
-// --------------------------------------------------
+// .content-text.blockquote – Zitatblock
+.content-text.blockquote {
+  max-width: 40rem;
+  position: relative;
+  padding: 1.5rem 1.5rem 1.5rem 4rem;
+  background: oklch(97% 0.005 255);
+  border-left: 3px solid var(--color-brand-yellow);
+  border-radius: 0 var(--base-border-radius) var(--base-border-radius) 0;
+
+  // Großes dekoratives Anführungszeichen-Icon
+  &::before {
+    content: '\f10d'; // fa-quote-left
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 1rem;
+    top: 1.4rem;
+    font-size: 1.75rem;
+    color: var(--color-brand-yellow);
+    line-height: 1;
+  }
+
+  .rte {
+    font-size: 1.125rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--color-brand-blue);
+
+    p:last-child { margin-bottom: 0; }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .content-text.blockquote {
+    background: oklch(27% 0.025 255);
+  }
+}
+html[data-color-scheme="dark"] .content-text.blockquote {
+  background: oklch(27% 0.025 255);
+}
+
 // .content-text.callout – Callout-/Hinweis-Box
-// --------------------------------------------------
 .content-text.callout {
   max-width: 45rem;
   padding: 0.85rem 1rem 0.85rem 1.1rem;
@@ -104,9 +139,7 @@ html[data-color-scheme="dark"] .content-text.callout {
   background: oklch(27% 0.025 255);
 }
 
-// --------------------------------------------------
 // content-description-list – dl/dt/dd (allgemein)
-// --------------------------------------------------
 .content-description-list:not(.school-meta) {
   dl {
     margin: 0;
@@ -137,9 +170,7 @@ html[data-color-scheme="dark"] .content-text.callout {
   }
 }
 
-// --------------------------------------------------
 // .content-description-list.table – Zweispaltig tabellarisch
-// --------------------------------------------------
 .content-description-list.table {
   dl {
     display: grid;
@@ -201,9 +232,7 @@ html[data-color-scheme="dark"] .content-text.callout {
   }
 }
 
-// --------------------------------------------------
 // .content-list – FA-Icon als Listen-Marker
-// --------------------------------------------------
 .content-list {
   ul {
     list-style: none;
@@ -224,7 +253,68 @@ html[data-color-scheme="dark"] .content-text.callout {
         top: 0.1em;
         color: var(--color-brand-blue);
         font-size: 0.95em;
+        background: none;
+        border-radius: 0;
+        width: auto;
+        height: auto;
       }
+    }
+  }
+
+}
+
+// ul – Gestylte Aufzählungszeichen (global in #main)
+// :where() hält Spezifität niedrig → .content-list ul überschreibt automatisch
+:where([id="main"]) ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+
+  li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.3rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.2rem;
+      top: 0.55em;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--color-brand-blue);
+    }
+  }
+}
+
+// ol – Gestylte Ordnungszahlen (global in #main)
+[id="main"] ol {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  counter-reset: ol-counter;
+
+  li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.3rem;
+    counter-increment: ol-counter;
+
+    &::before {
+      content: counter(ol-counter);
+      position: absolute;
+      left: 0;
+      top: 0.15em;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--color-brand-blue);
+      color: oklch(100% 0 0);
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1.35rem;
+      text-align: center;
     }
   }
 }

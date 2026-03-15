@@ -1,0 +1,103 @@
+// components/sitemap – mod_sitemap
+
+.mod_sitemap {
+
+  // Grid der Sektionskarten
+  > ul.level_1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: var(--grid-gutter);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Karte pro Sektion
+  > ul.level_1 > li {
+    background: oklch(100% 0 0);
+    border-radius: var(--base-border-radius);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+    overflow: hidden;
+    padding-left: 0; // globale ul li padding-left zurücksetzen
+    margin-bottom: 0;
+
+    &::before { display: none; } // globaler blauer Punkt
+  }
+
+  // Sektionsüberschrift (Level-1-Link)
+  > ul.level_1 > li > a {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-brand-blue);
+    text-decoration: none;
+    padding: 0.85rem 1.25rem;
+    background: oklch(96% 0.008 255);
+    border-bottom: 3px solid var(--color-brand-yellow);
+
+    &:hover { color: var(--color-brand-blue-light); }
+  }
+
+  // Level-2-Liste
+  > ul.level_1 > li > ul.level_2 {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0;
+
+    > li {
+      padding-left: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--color-gray-light);
+
+      &:last-child { border-bottom: none; }
+      &::before { display: none; }
+
+      > a {
+        display: flex;
+        align-items: center;
+        gap: 0.4em;
+        padding: 0.35rem 1.25rem;
+        font-size: 0.875rem;
+        color: var(--color-text);
+        text-decoration: none;
+        transition: background 0.12s ease, color 0.12s ease;
+
+        &::before {
+          content: '\f054'; // fa-chevron-right
+          font-family: "Font Awesome 7 Free";
+          font-weight: 900;
+          font-size: 0.6em;
+          color: var(--color-brand-blue);
+          opacity: 0.45;
+          flex-shrink: 0;
+        }
+
+        &:hover {
+          background: oklch(96% 0.008 255);
+          color: var(--color-brand-blue);
+          &::before { opacity: 1; }
+        }
+      }
+    }
+  }
+}
+
+// Dark Mode
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .mod_sitemap {
+    > ul.level_1 > li {
+      background: oklch(27% 0.025 255);
+      box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+      > a { background: oklch(24% 0.02 255); }
+      > ul.level_2 > li > a:hover { background: oklch(24% 0.02 255); }
+    }
+  }
+}
+html[data-color-scheme="dark"] .mod_sitemap {
+  > ul.level_1 > li {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+    > a { background: oklch(24% 0.02 255); }
+    > ul.level_2 > li > a:hover { background: oklch(24% 0.02 255); }
+  }
+}

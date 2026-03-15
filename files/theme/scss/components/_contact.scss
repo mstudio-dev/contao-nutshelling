@@ -7,6 +7,17 @@
   overflow: hidden;
   max-width: 18rem;
 
+  // Optionale Überschrift – wie .card__headline
+  h2, h3 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-brand-blue);
+    margin: 0;
+    padding: 1.25rem 1.25rem 0.75rem;
+
+    &::after { display: none; } // kein gelbes Underline
+  }
+
   // --------------------------------------------------
   // Bild oben (float_above)
   // --------------------------------------------------
@@ -106,9 +117,7 @@
   }
 }
 
-// --------------------------------------------------
 // Dark Mode
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) .ce_contact {
     background: oklch(27% 0.025 255);

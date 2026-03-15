@@ -1,6 +1,11 @@
+@import '../../../../assets/nutshell/scss/components/accordion';
 // components/accordion – content-accordion (handorgel, Contao 5.3+)
 
 .content-accordion {
+  .handorgel__fold {
+    margin-bottom: 0.375rem;
+  }
+
   // --------------------------------------------------
   // h2-Overrides: volle Breite + kein Underline
   // --------------------------------------------------
@@ -70,11 +75,15 @@
       background: oklch(97% 0.005 255);
     }
   }
+
+  // Flache Struktur (Contao 5.3+ ohne .handorgel__fold Wrapper):
+  // Abstand zwischen content und dem nächsten header
+  .handorgel__content + .handorgel__header {
+    margin-top: 0.375rem;
+  }
 }
 
-// --------------------------------------------------
 // Dark Mode
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) .content-accordion .handorgel__content > div {
     background: oklch(24% 0.02 255);

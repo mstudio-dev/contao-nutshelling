@@ -1,4 +1,5 @@
 // base/shared
+@import '../../../../assets/nutshell/scss/base/shared';
 
 // Nutshell setzt margin: 0 auto auf img → Bilder werden zentriert.
 // Überschreiben: Bilder linksbündig (margin: 0), Zentrierung nur wo explizit gewünscht.
@@ -11,9 +12,7 @@ img {
   padding-bottom: var(--base-spacing-unit-lg); // 2rem
 }
 
-// --------------------------------------------------
 // Pagination (nav.pagination)
-// --------------------------------------------------
 .pagination {
   margin-top: var(--base-spacing-unit);
 
@@ -35,6 +34,10 @@ img {
   }
 
   li {
+    padding-left: 0; // globale ul li::before-Regel zurücksetzen
+
+    &::before { display: none; }
+
     a,
     strong {
       display: flex;
@@ -154,11 +157,9 @@ img {
   }
 }
 
-// --------------------------------------------------
 // Spacing-Utilities – Margin + Padding
 // Basierend auf --base-spacing-unit-* Variablen
 // Im Contao-Backend am CSS-Feld eintragen
-// --------------------------------------------------
 
 // Margin-Top
 .mt-0  { margin-top: 0 !important; }

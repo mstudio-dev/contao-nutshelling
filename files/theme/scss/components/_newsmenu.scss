@@ -59,6 +59,12 @@ details[open] .newsmenu-dropdown__trigger::after {
 
   ul { list-style: none; margin: 0; padding: 0.35rem 0; }
 
+  li {
+    padding-left: 0;
+
+    &::before { display: none; }
+  }
+
   ul.level_1 > li.year > a,
   ul.level_1 > li.year > strong {
     display: block;

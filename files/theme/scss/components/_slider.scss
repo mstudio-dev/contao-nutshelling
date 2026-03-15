@@ -1,4 +1,4 @@
-// components/slider – Swiper
+// components/slider – Swiper (Contao 5.x Core)
 // Struktur: [id="hero"] > .inside > .mod_article.article--full + .mod_article.hero-text
 
 // H1 als Overlay-Artikel über den Slider (position: absolute)
@@ -33,36 +33,52 @@
   }
 }
 
-.ce_swiperStart {
-  // Swiper-Themevariablen für Buttons und Pagination
-  --swiper-theme-color:                          var(--color-brand-yellow);
-  --swiper-navigation-color:                     oklch(100% 0 0);
-  --swiper-navigation-size:                      36px;
-  --swiper-pagination-color:                     var(--color-brand-yellow);
-  --swiper-pagination-bullet-inactive-color:     oklch(100% 0 0);
-  --swiper-pagination-bullet-inactive-opacity:   0.5;
+// Swiper-Themevariablen und Button-Styling (alle Instanzen)
+// --swiper-navigation-size = Button-Größe in Swiper 12 (width = height = size)
+.swiper {
+  --swiper-theme-color:         var(--color-brand-yellow);
+  --swiper-pagination-color:    var(--color-brand-yellow);
+  --swiper-navigation-color:    oklch(100% 0 0);
+  --swiper-navigation-size:     44px;
 
+  .swiper-button-prev,
+  .swiper-button-next {
+    // Swiper 12: SVG-Icon füllt Button zu 100% → Padding erzeugt visuellen Abstand
+    padding: 10px;
+    box-sizing: border-box;
+    background: oklch(0% 0 0 / 0.35);
+    border-radius: 50%;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: oklch(0% 0 0 / 0.6);
+    }
+  }
+}
+
+// Hero-Swiper (Contao Core: .content-swiper > .swiper innerhalb #hero)
+#hero .swiper {
   position: relative;
   overflow: hidden;
 
-  // CI-Dunkelblau-Filter über den gesamten Slider für besseren Kontrast
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: oklch(20% 0.07 255 / 0.35); // --color-brand-blue-dark
-    pointer-events: none;
-  }
+  // Hero-spezifische Farben: weiße Navigation auf dunklem Overlay
+  --swiper-navigation-color:                   oklch(100% 0 0);
+  --swiper-pagination-bullet-inactive-color:   oklch(100% 0 0);
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
 
-  // Buttons und Pagination über dem Filter
-  .swiper-button-prev,
-  .swiper-button-next,
-  .swiper-pagination {
-    z-index: 2;
-  }
-
+  // CI-Dunkelblau-Filter auf den Slides, nicht auf .swiper –
+  // so werden Navigation und Pagination nicht vom Overlay überdeckt
   .swiper-slide {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: oklch(20% 0.07 255 / 0.35); // --color-brand-blue-dark
+      pointer-events: none;
+    }
+
     figure {
       position: relative;
       margin: 0;
@@ -82,30 +98,13 @@
       top: 0;
       left: 0;
       right: 0;
+      z-index: 1; // über dem CI-Overlay-::after
       padding: 0.5rem var(--base-spacing-unit);
       background: oklch(0% 0 0 / 0.45);
       color: oklch(100% 0 0);
       font-size: 0.875rem;
       line-height: 1.4;
       text-align: center;
-    }
-  }
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    width: 44px;
-    height: 44px;
-    background: oklch(0% 0 0 / 0.35);
-    border-radius: 50%;
-    transition: background 0.15s ease;
-
-    &::after {
-      font-size: 1rem;
-      font-weight: 900;
-    }
-
-    &:hover {
-      background: oklch(0% 0 0 / 0.6);
     }
   }
 

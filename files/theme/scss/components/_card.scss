@@ -1,8 +1,6 @@
 // components/card
 
-// --------------------------------------------------
 // Parallax-Karten-Sektion
-// --------------------------------------------------
 .parallax-cards {
   position: relative;
   overflow: hidden;
@@ -73,9 +71,7 @@
   }
 }
 
-// --------------------------------------------------
 // ce_card – Contao Card-Element
-// --------------------------------------------------
 .ce_card {
   background: oklch(100% 0 0);
   border-radius: var(--base-border-radius);
@@ -110,21 +106,48 @@
     font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--color-text);
-
     > *:last-child {
       margin-bottom: 0;
     }
   }
 }
 
+// Nutshell setzt .col-N > .inside > .block { padding-bottom: 0 } –
+// für ce_card den Card-Innenabstand wiederherstellen
+.inside .ce_card.block {
+  padding-bottom: 1.25rem;
+}
+
+// .card auf content-element-group → Card-Optik
+.content-element-group.card {
+  background: oklch(100% 0 0);
+  border-radius: var(--base-border-radius);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+  overflow: hidden;
+  padding: 1.25rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-brand-blue);
+    margin-bottom: 0.75rem;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
 // Dark Mode
 @media (prefers-color-scheme: dark) {
-  html:not([data-color-scheme="light"]) .ce_card {
+  html:not([data-color-scheme="light"]) .ce_card,
+  html:not([data-color-scheme="light"]) .content-element-group.card {
     background: oklch(27% 0.025 255);
     box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
   }
 }
-html[data-color-scheme="dark"] .ce_card {
+html[data-color-scheme="dark"] .ce_card,
+html[data-color-scheme="dark"] .content-element-group.card {
   background: oklch(27% 0.025 255);
   box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
 }

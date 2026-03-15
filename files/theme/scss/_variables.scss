@@ -1,5 +1,6 @@
 // Project variables
 // Overrides nutshell/_variables.scss defaults
+@import '../../../assets/nutshell/scss/variables';
 //
 // OKLCH-Farben: https://developer.mozilla.org/de/docs/Web/CSS/color_value/oklch
 // Barrierefreiheit: WCAG AA = min. 4.5:1 Kontrast (Text), 3:1 (große Texte/UI)
@@ -95,11 +96,9 @@ html {
   --table-background-light:   oklch(96% 0.005 255);
 }
 
-// --------------------------------------------------
 // DARK MODE – Variablen als Mixin (wird zweifach verwendet:
 // 1) via prefers-color-scheme, 2) via manuelles Toggle)
 // Kontrast auf dunklem BG: Text auf BG immer ≥ 4.5:1 (AA)
-// --------------------------------------------------
 @mixin theme-dark {
   // Hintergründe
   --color-page-background:     oklch(18% 0.02 255);  // dunkles Blau-Schwarz

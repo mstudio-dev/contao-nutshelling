@@ -1,16 +1,13 @@
+@import '../../../../assets/nutshell/scss/components/events';
 // components/events – mod_eventlist
 
-// --------------------------------------------------
 // Modul-Überschrift
-// --------------------------------------------------
 .mod_eventlist > h1,
 .mod_eventlist > h2 {
   margin-bottom: var(--base-spacing-unit);
 }
 
-// --------------------------------------------------
 // layout_upcoming – Terminliste
-// --------------------------------------------------
 .layout_upcoming {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -28,6 +25,7 @@
     color: var(--color-gray);
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
+    min-width: 11rem; // Platz für DD.MM.YYYY–DD.MM.YYYY
   }
 
   > a {
@@ -43,22 +41,25 @@
     }
   }
 
-  // Läuft gerade: linker Akzentbalken + fettes Datum
+  // Läuft gerade: Datum in CI-Blau + circle-dot Icon am Zeilenende
   &.current {
     time.date {
-      font-weight: 600;
       color: var(--color-brand-blue);
     }
 
-    > a {
-      font-weight: 600;
+    > a::after {
+      content: '\f192'; // fa-circle-dot – läuft gerade
+      font-family: "Font Awesome 7 Free";
+      font-weight: 900;
+      font-size: 0.75em;
+      color: var(--color-brand-yellow);
+      margin-left: 0.5em;
+      vertical-align: 0.1em;
     }
   }
 }
 
-// --------------------------------------------------
 // Mobile (< 550px): gestapelt
-// --------------------------------------------------
 @include media-query(screen-xs-max) {
   .layout_upcoming {
     grid-template-columns: 1fr;

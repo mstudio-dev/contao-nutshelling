@@ -1,4 +1,5 @@
 // base/article
+@import '../../../../assets/nutshell/scss/base/article';
 
 // Nutshell entfernt bei article--full nur padding-top/bottom, nicht left/right
 .article--full {
@@ -13,9 +14,7 @@
   background-color: oklch(100% 0 0);
 }
 
-// --------------------------------------------------
 // .col-6 – Inhaltselemente in 2-spaltigem Grid (50/50)
-// --------------------------------------------------
 .col-6 > .inside {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,9 +39,7 @@
   }
 }
 
-// --------------------------------------------------
 // .col-4 – Inhaltselemente in 3-spaltigem Grid (33/33/33)
-// --------------------------------------------------
 .col-4 > .inside {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -61,6 +58,36 @@
 // Mobile (< 550px): 1 Spalte
 @include media-query(screen-xs-max) {
   .col-4 > .inside {
+    grid-template-columns: 1fr;
+  }
+}
+
+// .col-3 – Inhaltselemente in 4-spaltigem Grid (25/25/25/25)
+.col-3 > .inside {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .block {
+    padding-bottom: 0;
+  }
+
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Tablet (< 768px): 2 Spalten
+@include media-query(screen-sm-max) {
+  .col-3 > .inside {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Mobile (< 550px): 1 Spalte
+@include media-query(screen-xs-max) {
+  .col-3 > .inside {
     grid-template-columns: 1fr;
   }
 }

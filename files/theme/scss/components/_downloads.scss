@@ -1,7 +1,9 @@
+@import '../../../../assets/nutshell/scss/components/downloads';
 // components/downloads – content-downloads
 
 .content-downloads,
-.content-download {
+.content-download,
+.mod_newsreader ul.enclosure {
   // Card
   background: oklch(100% 0 0);
   border-radius: var(--base-border-radius);
@@ -60,9 +62,13 @@
       font-size: 1.1em;
       flex-shrink: 0;
       width: 1.25em;
+      height: auto;
       text-align: center;
       content: '\f15b'; // fa-file (Default)
       color: var(--color-gray);
+      position: static; // globale ul li::before-Regel zurücksetzen
+      background: none;
+      border-radius: 0;
     }
 
     a {
@@ -118,10 +124,14 @@
   .ext-csv::before   { content: '\f15c'; color: var(--color-gray); }        // fa-file-lines
 }
 
-// --------------------------------------------------
+// ul.enclosure ist selbst das Listenelement → List-Reset + Abstand
+.mod_newsreader ul.enclosure {
+  list-style: none;
+  margin: 1.5rem 0 0;
+}
+
 // Einzelelement: .content-download.download-element
 // ext-Klasse und download-element auf demselben Element
-// --------------------------------------------------
 .content-download.download-element {
   display: flex;
   align-items: center;
@@ -133,9 +143,13 @@
     font-size: 1.1em;
     flex-shrink: 0;
     width: 1.25em;
+    height: auto;
     text-align: center;
     content: '\f15b'; // fa-file (Default)
     color: var(--color-gray);
+    position: static;
+    background: none;
+    border-radius: 0;
   }
 
   a {
@@ -194,18 +208,18 @@
 .content-download.ext-txt::before,
 .content-download.ext-csv::before   { content: '\f15c'; color: var(--color-gray); }
 
-// --------------------------------------------------
 // Dark Mode
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) .content-downloads,
-  html:not([data-color-scheme="light"]) .content-download {
+  html:not([data-color-scheme="light"]) .content-download,
+  html:not([data-color-scheme="light"]) .mod_newsreader ul.enclosure {
     background: oklch(27% 0.025 255);
     box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
   }
 }
 html[data-color-scheme="dark"] .content-downloads,
-html[data-color-scheme="dark"] .content-download {
+html[data-color-scheme="dark"] .content-download,
+html[data-color-scheme="dark"] .mod_newsreader ul.enclosure {
   background: oklch(27% 0.025 255);
   box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
 }

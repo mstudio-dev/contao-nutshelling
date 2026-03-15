@@ -1,8 +1,7 @@
+@import '../../../../assets/nutshell/scss/components/news';
 // components/news
 
-// --------------------------------------------------
 // Sektion-Überschrift (.content-headline)
-// --------------------------------------------------
 // Gelbe Linie nur opt-in: im Contao-Backend CSS-Klasse "headline--line" eintragen
 .content-headline.headline--line {
   position: relative;
@@ -22,9 +21,7 @@
   }
 }
 
-// --------------------------------------------------
 // News-Templates: kein gelbes h2-Underline
-// --------------------------------------------------
 .layout_latest,
 .layout_latest_compact,
 .layout_short,
@@ -34,9 +31,7 @@
   }
 }
 
-// --------------------------------------------------
 // Newslist: folgt .news-grid (Nutshell-Variablen)
-// --------------------------------------------------
 .mod_newslist {
   display: grid;
   gap: var(--grid-gutter);
@@ -64,9 +59,7 @@
   }
 }
 
-// --------------------------------------------------
 // News-Karte: gemeinsame Basis (alle Varianten)
-// --------------------------------------------------
 .layout_latest,
 .layout_latest_compact,
 .layout_short,
@@ -82,9 +75,7 @@
   }
 }
 
-// --------------------------------------------------
 // .layout_latest + .layout_latest_compact: mit Bild-Overlay
-// --------------------------------------------------
 .layout_latest,
 .layout_latest_compact {
   display: grid;
@@ -196,9 +187,7 @@
   }
 }
 
-// --------------------------------------------------
 // Featured-Badge: gelber Stern rechts oben über dem Bild
-// --------------------------------------------------
 .featured {
   figure,
   .image_container {
@@ -226,9 +215,7 @@
   }
 }
 
-// --------------------------------------------------
 // .layout_short: kein Bild, normales Info
-// --------------------------------------------------
 .layout_short {
   display: flex;
   flex-direction: column;
@@ -297,9 +284,7 @@
   }
 }
 
-// --------------------------------------------------
 // .layout_simple: Zeit + Link nebeneinander
-// --------------------------------------------------
 .layout_simple {
   display: flex;
   align-items: baseline;
@@ -326,9 +311,7 @@
   }
 }
 
-// --------------------------------------------------
 // Dark Mode: News-Karten abdunkeln, heller als article--white (oklch(22%))
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) {
     .layout_latest,
@@ -358,9 +341,7 @@ html[data-color-scheme="dark"] {
   }
 }
 
-// --------------------------------------------------
 // Scroll-Reveal: automatisch für alle News-Karten
-// --------------------------------------------------
 .layout_latest,
 .layout_latest_compact,
 .layout_short,
@@ -403,9 +384,7 @@ html[data-color-scheme="dark"] {
   }
 }
 
-// --------------------------------------------------
 // „Alle Neuigkeiten"-Link: News-spezifische Overrides
-// --------------------------------------------------
 .mod_newslist .content-hyperlink {
   text-align: right;
   margin-top: calc(-1 * var(--base-spacing-unit));

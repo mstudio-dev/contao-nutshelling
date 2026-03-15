@@ -4,62 +4,40 @@
 
 // VARIABLES
 @import 'config';
-@import '../../../assets/nutshell/scss/variables';
 @import 'variables';
 
-// load these directly from nutshell, as we don't need additional normalize, resets and box-sizing
+// GENERIC (keine Custom-Gegenstücke)
 @import '../../../assets/nutshell/scss/generic/normalize';
 @import '../../../assets/nutshell/scss/generic/contao-reset';
 @import '../../../assets/nutshell/scss/generic/box-sizing';
 
-
 // FONT AWESOME (vorkompiliert, da FA 7.x @use verwendet)
 @import '../../../../assets/contao-component-fontawesome-free/fontawesomefree/css/all.min.css';
 
-@import '../../../assets/nutshell/scss/base/shared';
 @import 'base/shared';
-@import '../../../assets/nutshell/scss/base/page';
 @import 'base/page';
 @import 'base/fonts';
-@import '../../../assets/nutshell/scss/base/grid';
 @import 'base/grid';
-@import '../../../assets/nutshell/scss/base/type';
 @import 'base/type';
-@import '../../../assets/nutshell/scss/base/layout';
 @import 'base/layout';
-@import '../../../assets/nutshell/scss/base/article';
 @import 'base/article';
 @import 'base/animation';
 @import 'base/icons';
 
-@import '../../../assets/nutshell/scss/components/media';
 @import 'components/media';
-@import '../../../assets/nutshell/scss/components/links';
 @import 'components/links';
-@import '../../../assets/nutshell/scss/components/navs';
 @import 'components/navs';
-@import '../../../assets/nutshell/scss/components/slider';
 @import 'components/slider';
-@import '../../../assets/nutshell/scss/components/news';
 @import 'components/news';
 @import 'components/newsmenu';
-@import '../../../assets/nutshell/scss/components/events';
 @import 'components/events';
-@import '../../../assets/nutshell/scss/components/forms';
 @import 'components/forms';
-@import '../../../assets/nutshell/scss/components/accordion';
 @import 'components/accordion';
-@import '../../../assets/nutshell/scss/components/downloads';
 @import 'components/downloads';
-@import '../../../assets/nutshell/scss/components/tables';
 @import 'components/tables';
-@import '../../../assets/nutshell/scss/components/newsletter';
 @import 'components/newsletter';
-@import '../../../assets/nutshell/scss/components/faq';
 @import 'components/faq';
-@import '../../../assets/nutshell/scss/components/comments';
 @import 'components/comments';
-@import '../../../assets/nutshell/scss/components/search';
 @import 'components/search';
 
 @import 'components/ticker';
@@ -70,4 +48,6 @@
 @import 'components/notes';
 @import 'components/card';
 @import 'components/text';
+@import 'components/markdown';
 @import 'components/login';
+@import 'components/sitemap';

@@ -1,3 +1,4 @@
+@import '../../../../assets/nutshell/scss/components/navs';
 // components/navs
 // Basierend auf: <nav class="mod_navigation mainmenu block" id="main-nav">
 // Struktur: .level_1 > li > a|strong + .level_2 > li > a|strong
@@ -5,9 +6,7 @@
 // Contao 4+: Aktive Seite = <strong class="active">, andere = <a class="trail|submenu|...">
 // a.active und a[aria-current="page"] kommen nie vor!
 
-// --------------------------------------------------
 // SKIP-LINK (a.invisible in der Navigation)
-// --------------------------------------------------
 #main-nav > a.invisible {
   display: block;
 
@@ -28,9 +27,7 @@
   }
 }
 
-// --------------------------------------------------
 // HAUPTNAVIGATION
-// --------------------------------------------------
 .mod_navigation.mainmenu {
   align-self: stretch;
   display: flex;
@@ -173,9 +170,7 @@
   }
 }
 
-// --------------------------------------------------
 // DARK MODE
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   .mod_navigation {
     .level_2 {
@@ -185,9 +180,7 @@
   }
 }
 
-// --------------------------------------------------
 // #subnav – Dark Mode: dunkles Blau beibehalten
-// --------------------------------------------------
 @mixin subnav-dark {
   #subnav {
     $bg: oklch(22% 0.06 255);
@@ -210,9 +203,7 @@
 }
 html[data-color-scheme="dark"] { @include subnav-dark; }
 
-// --------------------------------------------------
 // HAMBURGER-BUTTON (per JS ins DOM eingefügt)
-// --------------------------------------------------
 .nav-toggle {
   display: none;
 
@@ -245,9 +236,7 @@ html[data-color-scheme="dark"] { @include subnav-dark; }
   }
 }
 
-// --------------------------------------------------
 // MOBILE – Navigation ausblenden, per Toggle öffnen
-// --------------------------------------------------
 @include media-query(screen-sm-max) {
   .mod_navigation.mainmenu {
     display: none;
@@ -293,9 +282,7 @@ html[data-color-scheme="dark"] { @include subnav-dark; }
   }
 }
 
-// --------------------------------------------------
 // #subnav – Horizontale Sekundärnavigation (Pills)
-// --------------------------------------------------
 #subnav {
   background: var(--color-brand-blue);
   border-top: 1px solid oklch(100% 0 0 / 0.1);
@@ -387,6 +374,7 @@ html[data-color-scheme="dark"] { @include subnav-dark; }
       text-decoration: none;
       font-size: 0.75rem;
       font-weight: 500;
+      line-height: 1;
       white-space: nowrap;
       background: oklch(100% 0 0 / 0.08);
       transition: color 0.15s ease, background 0.15s ease;

@@ -1,9 +1,20 @@
+@import '../../../../assets/nutshell/scss/components/media';
 // components/media
 
-// --------------------------------------------------
 // Galerie: Hover-Effekt für klickbare Bilder
-// --------------------------------------------------
 .content-gallery {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    padding-left: 0;
+
+    &::before { display: none; }
+  }
+
   figure {
     overflow: hidden;
   }
@@ -23,9 +34,7 @@
   }
 }
 
-// --------------------------------------------------
 // Partner-Galerie: Grayscale → Farbe on Hover
-// --------------------------------------------------
 .partner.content-gallery {
   figure a {
     img {
@@ -40,9 +49,7 @@
   }
 }
 
-// --------------------------------------------------
 // Swiper-Galerie (.gallery-swiper)
-// --------------------------------------------------
 .gallery-swiper {
   // Pagination-Bereich: 0.75rem Abstand + ~12px Bullets + 0.25rem Puffer = ~2.25rem
   --gallery-pagination-height: 2.25rem;
@@ -98,9 +105,47 @@
   }
 }
 
-// --------------------------------------------------
+// content-gallery: Spalten 7–12 (Nutshell endet bei 6)
+.content-gallery {
+  &--cols-7 {
+    ul {
+      @include make-row(3);
+      @include media-query(screen-md) { @include make-row(7); }
+    }
+  }
+  &--cols-8 {
+    ul {
+      @include make-row(3);
+      @include media-query(screen-md) { @include make-row(8); }
+    }
+  }
+  &--cols-9 {
+    ul {
+      @include make-row(3);
+      @include media-query(screen-md) { @include make-row(9); }
+    }
+  }
+  &--cols-10 {
+    ul {
+      @include make-row(4);
+      @include media-query(screen-md) { @include make-row(10); }
+    }
+  }
+  &--cols-11 {
+    ul {
+      @include make-row(4);
+      @include media-query(screen-md) { @include make-row(11); }
+    }
+  }
+  &--cols-12 {
+    ul {
+      @include make-row(4);
+      @include media-query(screen-md) { @include make-row(12); }
+    }
+  }
+}
+
 // Float-Utilities – Bildumfluss (Contao float_left / float_right)
-// --------------------------------------------------
 [id="main"] {
   .float_left {
     margin: 0 var(--base-spacing-unit) var(--base-spacing-unit) 0;
@@ -141,9 +186,7 @@
   }
 }
 
-// --------------------------------------------------
 // figcaption – Bildunterschriften in Content-Elementen
-// --------------------------------------------------
 [id="main"] figcaption {
   font-size: 0.8125rem;
   color: var(--color-gray);

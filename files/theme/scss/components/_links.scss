@@ -1,8 +1,7 @@
+@import '../../../../assets/nutshell/scss/components/links';
 // components/links
 
-// --------------------------------------------------
 // .content-hyperlink – Contao Hyperlink-Element (allgemein)
-// --------------------------------------------------
 .content-hyperlink {
   // ------ Textlink ------
   a:not(:has(img)) {
@@ -80,9 +79,7 @@
   }
 }
 
-// --------------------------------------------------
 // .content-hyperlink.card – Karten-Darstellung
-// --------------------------------------------------
 .content-hyperlink.card {
   background: oklch(100% 0 0);
   border-radius: var(--base-border-radius);
@@ -171,9 +168,7 @@ html[data-color-scheme="dark"] .content-hyperlink.card {
   }
 }
 
-// --------------------------------------------------
 // EXTERNE LINKS – Font Awesome Extern-Icon
-// --------------------------------------------------
 
 // 1) Bildlinks: halbtransparentes Overlay on Hover/Focus
 a[target="_blank"]:has(img) {

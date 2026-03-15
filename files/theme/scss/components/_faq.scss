@@ -1,3 +1,4 @@
+@import '../../../../assets/nutshell/scss/components/faq';
 // components/faq – mod_faqpage
 
 .module-faqpage {
@@ -6,7 +7,7 @@
   // Kategorie-Überschrift (h2)
   // --------------------------------------------------
   article > h2 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
   }
 
   // --------------------------------------------------
@@ -82,31 +83,25 @@
   }
 
   // --------------------------------------------------
-  // .toplink – kleiner Link mit Pfeil-Icon
+  // Smooth open/close via ::details-content (Chrome 131+, FF 136+, Safari 18.2+)
   // --------------------------------------------------
-  .toplink {
-    margin-top: 1rem;
-    text-align: right;
+  .faq-item {
+    interpolate-size: allow-keywords;
 
-    a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3em;
-      font-size: 0.8125rem;
-      color: var(--color-gray);
-      background: transparent;
-      border: none;
-      padding: 0;
-      text-decoration: none;
-
-      &::before {
-        content: '\f077'; // fa-chevron-up
-        font-family: "Font Awesome 7 Free";
-        font-weight: 900;
-        font-size: 0.8em;
-      }
-
-      &:hover { color: var(--color-brand-blue); }
+    &::details-content {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.3s ease, content-visibility 0.3s ease allow-discrete;
     }
+
+    &[open]::details-content {
+      height: auto;
+    }
+  }
+}
+
+@starting-style {
+  .module-faqpage .faq-item[open]::details-content {
+    height: 0;
   }
 }

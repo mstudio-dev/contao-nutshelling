@@ -1,9 +1,10 @@
+@import '../../../../assets/nutshell/scss/components/tables';
 // components/tables
 
-// --------------------------------------------------
 // .content-table – Basis-Styling
-// --------------------------------------------------
 .content-table {
+  overflow-x: auto; // horizontales Scrollen bei breiten Tabellen
+
   h2, h3, h4 {
     margin-bottom: 0.75rem;
   }
@@ -12,6 +13,13 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9375rem;
+  }
+
+  // Bilder in Tabellenzellen: nicht breiter als die Spalte
+  td img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 
   tbody tr {
@@ -67,10 +75,8 @@ html[data-color-scheme="dark"] .content-table tbody tr:nth-child(odd) {
   background: oklch(24% 0.02 255);
 }
 
-// --------------------------------------------------
 // .content-table.definition – Definition-List-Optik (Begriff + Beschreibung)
 // Tabelle ohne Rahmen, erste Spalte als Term (blau, fett, schmal)
-// --------------------------------------------------
 .content-table.definition {
   table {
     border: none;

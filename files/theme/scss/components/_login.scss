@@ -102,9 +102,7 @@
   }
 }
 
-// --------------------------------------------------
 // Dark Mode
-// --------------------------------------------------
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) .mod_login.login form {
     background: oklch(27% 0.025 255);
