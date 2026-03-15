@@ -166,12 +166,3 @@ templates/
 @include media-query(screen-lg)      // min-width 1024px
 ```
 
-## Entwicklung
-
-```bash
-# Cache leeren nach Template-Änderungen
-ddev exec contao-console cache:clear
-
-# Kompiliertes CSS
-assets/css/files_theme_scss_style.scss.css
-```
