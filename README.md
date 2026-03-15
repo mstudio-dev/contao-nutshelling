@@ -74,6 +74,7 @@ Contao 5.3 Theme auf Basis von [Nutshell](https://nutshell.erdmann-freunde.de/) 
 | `scroll-reveal.js` | IntersectionObserver, 12 % Threshold, 2-rAF-Delay, `prefers-reduced-motion` |
 | `subnav-scroll.js` | Scroll-Buttons für `#subnav`-Overflow, nur wenn nötig |
 | `parallax.js` | Parallax-Hintergrund auf `.parallax-cards`, `requestAnimationFrame` |
+| `read-more.js` | Ausklappbare `.content-text.collapsible` Elemente mit Verlauf + Toggle |
 
 ---
 
@@ -130,7 +131,8 @@ files/theme/js/
 ├── nav-toggle.js
 ├── scroll-reveal.js
 ├── subnav-scroll.js
-└── parallax.js
+├── parallax.js
+└── read-more.js
 
 templates/
 ├── mod_article.html.twig               .inside Wrapper für wrapper-max + Padding

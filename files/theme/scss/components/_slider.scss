@@ -1,17 +1,23 @@
 // components/slider – Swiper (Contao 5.x Core)
 // Struktur: [id="hero"] > .inside > .mod_article.article--full + .mod_article.hero-text
 
-// H1 als Overlay-Artikel über den Slider (position: absolute)
+// H1 als Overlay-Artikel über den Slider – Grid-Overlay (robust gegen .inside-Padding)
 [id="hero"] > .inside:has(> .mod_article.article--full + .mod_article.hero-text) {
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+[id="hero"] > .inside > .mod_article.article--full {
+  grid-row: 1;
+  grid-column: 1;
 }
 
 [id="hero"] > .inside > .mod_article.hero-text {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  right: 0;
+  grid-row: 1;
+  grid-column: 1;
+  align-self: center;
   z-index: 10;
   pointer-events: none;
 
