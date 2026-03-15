@@ -1,6 +1,10 @@
 // base/layout
 @import '../../../../assets/nutshell/scss/base/layout';
 
+// Theme hat 4 Sektionen im Wrapper (#header, #hero, #main, #footer) –
+// Nutshell-Grid (min-content auto min-content) passt nicht → Block-Layout.
+[id="wrapper"] { display: block; }
+
 // #header – Logo links, Navigation rechts
 [id="header"] {
   position: sticky;
