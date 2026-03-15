@@ -12,18 +12,14 @@
   overflow: hidden;
   white-space: nowrap;
 
-  // Bundle-Default (#eee) überschreiben
   .tickertext {
+    background-color: transparent; // Bundle setzt #eee
+  }
+
+  .tickertext > div {
     display: flex;
     align-items: center;
     padding-block: 0.65rem;
-    background-color: transparent;
-  }
-
-  // Alle msg-*-Hintergrundfarben des Bundles zurücksetzen
-  [class*="msg-"] {
-    background-color: transparent !important;
-    color: inherit !important;
   }
 
   // Jede Meldung: Uppercase + +++ als Trenner via ::before/::after
