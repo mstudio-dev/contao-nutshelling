@@ -288,67 +288,6 @@ html[data-color-scheme="dark"] .content-text.callout {
   }
 }
 
-// .content-text.collapsible – Inhalt ausblenden + Toggle
-.content-text.collapsible {
-  position: relative;
-  max-height: 12rem;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4rem;
-    background: linear-gradient(to bottom, transparent, var(--color-page-background));
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  &.is-expanded::after {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-// Button (vom JS generiert, direkt nach .content-text.collapsible)
-.read-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  margin-top: 0.75rem;
-  margin-bottom: var(--base-spacing-unit);
-  padding: 0.4rem 1rem;
-  background: none;
-  border: 1.5px solid var(--color-brand-blue);
-  border-radius: var(--base-border-radius);
-  color: var(--color-brand-blue);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-
-  &::after {
-    font-family: "Font Awesome 7 Free";
-    font-weight: 900;
-    content: '\f078'; // fa-chevron-down
-    font-size: 0.75em;
-    transition: transform 0.2s ease;
-  }
-
-  &.is-expanded::after {
-    transform: rotate(180deg);
-  }
-
-  &:hover,
-  &:focus-visible {
-    background: var(--color-brand-blue);
-    color: oklch(100% 0 0);
-  }
-}
-
 // ol – Gestylte Ordnungszahlen (global in #main)
 [id="main"] ol {
   list-style: none;

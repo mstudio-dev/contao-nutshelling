@@ -1,6 +1,5 @@
 {% extends "@Contao/content_element/_base.html.twig" %}
 {% use "@Contao/component/_figure.html.twig" %}
-{% use "@Contao/component/_stylesheet.html.twig" %}
 
 {% block content %}
 <div class="swiper gallery-swiper" data-slides="{{ items_per_row|default(4) }}">
@@ -15,81 +14,4 @@
   <div class="swiper-button-next"></div>
   <div class="swiper-pagination"></div>
 </div>
-{% endblock %}
-
-{% block script %}
-  {#
-    swiper_js wird dedupliziert – nur ein Block landet im Output.
-    Falls die Gallery vor dem Hero-CE gerendert wird, enthält dieser Block
-    auch den Fallback-Init für alle Standard-Swiper (Hero, etc.).
-    Falls der Core-Swiper-CE zuerst rendert, gewinnt dessen Version
-    und beide Swiper werden dort initialisiert.
-  #}
-  {% add "swiper_js" to body %}
-    <script src="{{ asset('js/swiper-bundle.min.js', 'contao-components/swiper') }}"></script>
-    {% set script_attributes = attrs().setIfExists('nonce', csp_nonce('script-src')) %}
-    <script{{ script_attributes }}>
-      (function() {
-        // Fallback-Init für Standard-Swiper (z.B. Hero), die kein eigenes Init haben.
-        // Wird nur ausgeführt, wenn dieser Block vor dem Core-Swiper-CE-Block landet.
-        document.querySelectorAll('.swiper:not(.gallery-swiper)').forEach(function(el) {
-          if (el.swiper) return;
-          var opts = {
-            speed:        parseInt(el.getAttribute('data-speed')) || 300,
-            initialSlide: parseInt(el.getAttribute('data-offset')) || 0,
-            loop:         el.hasAttribute('data-loop'),
-            pagination:   { el: el.querySelector('.swiper-pagination'), clickable: true },
-            navigation:   { prevEl: el.querySelector('.swiper-button-prev'), nextEl: el.querySelector('.swiper-button-next') },
-          };
-          var delay = parseInt(el.getAttribute('data-delay'));
-          if (delay > 0) opts.autoplay = { delay: delay, pauseOnMouseEnter: true };
-          new Swiper(el, opts);
-        });
-      })();
-    </script>
-  {% endadd %}
-
-  {# Gallery-spezifischer Init mit eigenem Key – wird immer ausgegeben. #}
-  {% add "gallery_swiper_js" to body %}
-    {% set script_attributes = attrs().setIfExists('nonce', csp_nonce('script-src')) %}
-    <script{{ script_attributes }}>
-      (function() {
-        document.querySelectorAll('.gallery-swiper').forEach(function(el) {
-          if (el.swiper) { el.swiper.destroy(true, true); }
-          var slides = parseInt(el.getAttribute('data-slides')) || 4;
-          new Swiper(el, {
-            slidesPerView: 1,
-            spaceBetween: 12,
-            loop: true,
-            loopAdditionalSlides: slides,
-            autoplay: {
-              delay: 1000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            },
-            breakpoints: {
-              480:  { slidesPerView: Math.min(2, slides), spaceBetween: 16 },
-              1024: { slidesPerView: slides,              spaceBetween: 20 },
-            },
-            pagination: {
-              el: el.querySelector('.swiper-pagination'),
-              clickable: true,
-            },
-            navigation: {
-              prevEl: el.querySelector('.swiper-button-prev'),
-              nextEl: el.querySelector('.swiper-button-next'),
-            },
-          });
-        });
-      })();
-    </script>
-  {% endadd %}
-{% endblock %}
-
-{% block style %}
-  {% add "swiper_css" to stylesheets %}
-    {% with {file: asset('css/swiper-bundle.min.css', 'contao-components/swiper')} %}
-      {{ block('stylesheet_component') }}
-    {% endwith %}
-  {% endadd %}
 {% endblock %}
