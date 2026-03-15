@@ -74,7 +74,6 @@ Contao 5.3 Theme auf Basis von [Nutshell](https://nutshell.erdmann-freunde.de/) 
 | `scroll-reveal.js` | IntersectionObserver, 12 % Threshold, 2-rAF-Delay, `prefers-reduced-motion` |
 | `subnav-scroll.js` | Scroll-Buttons für `#subnav`-Overflow, nur wenn nötig |
 | `parallax.js` | Parallax-Hintergrund auf `.parallax-cards`, `requestAnimationFrame` |
-| `gallery-swiper.js` | Gallery-Swiper-Init (standalone, für Seiten ohne Twig-Template) |
 
 ---
 
@@ -131,8 +130,7 @@ files/theme/js/
 ├── nav-toggle.js
 ├── scroll-reveal.js
 ├── subnav-scroll.js
-├── parallax.js
-└── gallery-swiper.js
+└── parallax.js
 
 templates/
 ├── mod_article.html.twig               .inside Wrapper für wrapper-max + Padding
