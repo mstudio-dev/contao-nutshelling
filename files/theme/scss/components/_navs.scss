@@ -242,11 +242,11 @@ html[data-color-scheme="dark"] { @include subnav-dark; }
     display: none;
 
     &.nav-open {
-      display: flex;
+      display: block; // block statt flex → overflow-y: auto scrollt zuverlässig auf iOS/Android
       position: fixed;
       left: 0;
       right: 0;
-      z-index: 200;
+      z-index: 350; // > #header z-index: 300
       background-color: var(--color-brand-blue);
       max-height: calc(100dvh - var(--nav-top, 0px));
       overflow-y: auto;
@@ -257,6 +257,7 @@ html[data-color-scheme="dark"] { @include subnav-dark; }
     flex-direction: column;
     width: 100%;
     align-items: stretch;
+    min-height: 0; // verhindert flex-overflow-Bug bei sehr langen Untermenüs
   }
 
   .mod_navigation.mainmenu .level_1 > li {
