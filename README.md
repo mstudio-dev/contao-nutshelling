@@ -12,7 +12,7 @@ Contao 5.3 Theme auf Basis von [Nutshell](https://nutshell.erdmann-freunde.de/) 
 | Icons | Font Awesome 7 Free (Solid weight 900) |
 | Slider | Swiper.js |
 | Accordion | handorgel |
-| Lokale Entwicklung | ddev |
+
 
 ---
 
