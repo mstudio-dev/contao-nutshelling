@@ -1,0 +1,11 @@
+<script>
+            $(document).on("scroll", function(){ 
+            if ($(document).scrollTop() > 59){
+            $(".mainNav").addClass("shrink");
+            
+                } else {
+            $(".mainNav").removeClass("shrink");
+           
+                } 
+            });
+</script>

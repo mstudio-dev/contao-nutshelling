@@ -14,7 +14,8 @@
   background-color: oklch(100% 0 0);
 }
 
-// .col-6 – Inhaltselemente in 2-spaltigem Grid (50/50)
+// .col-6-6 – Inhaltselemente in 2-spaltigem Grid (50/50) | col-6 = Fallback
+.col-6-6 > .inside,
 .col-6 > .inside {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -27,6 +28,7 @@
   }
 
   // Einzelnes Element über volle Breite spannen
+  > .col-12,
   > .full-width {
     grid-column: 1 / -1;
   }
@@ -34,7 +36,144 @@
 
 // Mobile (< 550px): 1 Spalte
 @include media-query(screen-xs-max) {
+  .col-6-6 > .inside,
   .col-6 > .inside {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Headline des Elementgruppen-Wrappers immer über volle Breite
+// col-12 und full-width spannen ebenfalls alle Spalten
+.content-element-group[class*="col-"] {
+  > h1, > h2, > h3, > h4, > h5, > h6,
+  > .col-12, > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// content-element-group mit col-6-6: direkte Kindelemente in 2 Spalten | col-6 = Fallback
+.content-element-group.col-6-6,
+.content-element-group.col-6 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .col-12,
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+@include media-query(screen-xs-max) {
+  .content-element-group.col-6-6,
+  .content-element-group.col-6 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// .col-8-4 – Inhaltselemente in 2-spaltigem Grid (66/33)
+.col-8-4 > .inside,
+.content-element-group.col-8-4 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .block {
+    padding-bottom: 0;
+  }
+
+  > .col-12,
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Zweite Spalte (4/12): jedes Nicht-Full-Width-Element, dem ein weiteres vorangeht
+.col-8-4 > .inside > :not(.full-width):not(.col-12) ~ :not(.full-width):not(.col-12) h2 {
+  font-size: 1.125rem;
+}
+
+@include media-query(screen-sm-max) {
+  .col-8-4 > .inside,
+  .content-element-group.col-8-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// .col-4-4-4 – Inhaltselemente in 3-spaltigem Grid (33/33/33)
+.col-4-4-4 > .inside {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .block {
+    padding-bottom: 0;
+  }
+
+  > .col-12,
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// content-element-group mit col-4-4-4: direkte Kindelemente in 3 Spalten
+.content-element-group.col-4-4-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .col-12,
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+@include media-query(screen-sm-max) {
+  .col-4-4-4 > .inside,
+  .content-element-group.col-4-4-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include media-query(screen-xs-max) {
+  .col-4-4-4 > .inside,
+  .content-element-group.col-4-4-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// .col-3-3-3-3 – Inhaltselemente in 4-spaltigem Grid (25/25/25/25)
+.col-3-3-3-3 > .inside,
+.content-element-group.col-3-3-3-3 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gutter);
+  align-items: start;
+
+  > .block {
+    padding-bottom: 0;
+  }
+
+  > .col-12,
+  > .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+@include media-query(screen-sm-max) {
+  .col-3-3-3-3 > .inside,
+  .content-element-group.col-3-3-3-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include media-query(screen-xs-max) {
+  .col-3-3-3-3 > .inside,
+  .content-element-group.col-3-3-3-3 {
     grid-template-columns: 1fr;
   }
 }
@@ -50,6 +189,7 @@
     padding-bottom: 0;
   }
 
+  > .col-12,
   > .full-width {
     grid-column: 1 / -1;
   }
@@ -73,6 +213,7 @@
     padding-bottom: 0;
   }
 
+  > .col-12,
   > .full-width {
     grid-column: 1 / -1;
   }

@@ -26,6 +26,14 @@ html {
   --color-brand-yellow:       oklch(83% 0.17 95);
   --color-brand-yellow-dark:  oklch(65% 0.15 88); // Dunkleres Gelb für Text auf hellem BG (4.6:1 ✓ AA)
 
+  // Rot-CI-Palette
+  --color-brand-red:          #7D0C10;  // Primär
+  --color-brand-red-light:    #9a1215;  // Hover/Akzent
+  --color-brand-red-dark:     #5e090c;  // Dunklere Variante (Header-Top, Active)
+
+  // Hero-Overlay als Variable (hardcoded oklch() + Opacity → nicht per var() überschreibbar)
+  --hero-overlay: oklch(20% 0.07 255 / 0.35);      // Standard: Blau-CI
+
   // --------------------------------------------------
   // NUTSHELL OVERRIDES
   // --------------------------------------------------
@@ -50,15 +58,19 @@ html {
   // LINKS & BUTTONS
   // --------------------------------------------------
   --links-color:              var(--color-brand-blue);
-  --links-color-hover:        var(--color-brand-blue-light);
-  --links-color-visited:      oklch(35% 0.09 280);  // leicht violetter Blauton
+  --links-color-hover:        var(--color-brand-blue-dark);
+  --links-color-visited:      var(--links-color);
 
   // Focus-Ring: gut sichtbar, barrierefrei
   --links-outline-focus:      2px solid var(--color-brand-yellow);
 
-  --button-background:        var(--color-brand-blue);
+  --button-background:        #7D0C10;
   --button-color:             var(--color-text-inverted);
-  --button-background-hover:  var(--color-brand-blue-light);
+  --button-background-hover:  #6a0a0e;
+  --button-background-active: #640a0d;
+  --button-border-color:      #7D0C10;
+  --button-border-hover:      #640a0d;
+  --button-focus-shadow-rgb:  145, 48, 52;
 
   // --------------------------------------------------
   // LAYOUT & ABSTÄNDE
@@ -69,6 +81,15 @@ html {
   --layout-footer-color:      oklch(90% 0.01 255);
 
   --grid-gutter:              1.5rem;
+  --logo-width:               64px;
+
+  // Überschriften: mehr Abstand nach unten
+  --h1-spacing-bottom: 1.25rem;
+  --h2-spacing-bottom: 1rem;
+  --h3-spacing-bottom: 0.875rem;
+  --h4-spacing-bottom: 0.75rem;
+  --h5-spacing-bottom: 0.75rem;
+  --h6-spacing-bottom: 0.75rem;
 
   // --------------------------------------------------
   // TYPOGRAFIE
@@ -138,14 +159,18 @@ html {
 
   // Links
   --links-color:               var(--color-brand-blue);
-  --links-color-hover:         var(--color-brand-blue-light);
-  --links-color-visited:       oklch(65% 0.09 280);
+  --links-color-hover:         var(--color-brand-blue-dark);
+  --links-color-visited:       var(--links-color);
   --links-outline-focus:       2px solid var(--color-brand-yellow);
 
   // Buttons
-  --button-background:         var(--color-brand-blue);
-  --button-color:              oklch(18% 0.02 255);  // dunkler Text auf hellem Blau
-  --button-background-hover:   var(--color-brand-blue-light);
+  --button-background:         #7D0C10;
+  --button-color:              var(--color-text-inverted);
+  --button-background-hover:   #6a0a0e;
+  --button-background-active:  #640a0d;
+  --button-border-color:       #7D0C10;
+  --button-border-hover:       #640a0d;
+  --button-focus-shadow-rgb:   145, 48, 52;
 
   // Formfelder
   --forms-input-background:    oklch(24% 0.02 255);

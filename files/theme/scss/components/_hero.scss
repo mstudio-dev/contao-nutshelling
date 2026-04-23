@@ -1,1 +1,30 @@
 // components/hero
+
+#hero .content-swiper {
+  position: relative;
+
+  > h1 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 10;
+    pointer-events: none;
+    // rem statt em: em skaliert mit der h1-Schriftgröße und würde max-width
+    // auf ~3000px aufblasen → Zentrierung via margin: auto greift nie.
+    // rem ist immer relativ zur Root-Schriftgröße (16px) = identischer px-Wert
+    // wie wrapper-max beim body-Text, sodass die h1 mit .mod_article > .inside bündig ist.
+    @include wrapper-max(66.625rem);
+    @include padding-default;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: oklch(100% 0 0);
+    text-decoration: none;
+    text-shadow:
+      0 2px 6px oklch(0% 0 0 / 0.7),
+      0 4px 20px oklch(0% 0 0 / 0.5);
+  }
+}

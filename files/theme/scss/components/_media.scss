@@ -57,12 +57,17 @@
   overflow: hidden;
   padding-bottom: var(--gallery-pagination-height);
 
-  --swiper-theme-color:                        var(--color-brand-yellow);
   --swiper-navigation-color:                   oklch(100% 0 0);
   --swiper-navigation-size:                    36px;
-  --swiper-pagination-color:                   var(--color-brand-yellow);
   --swiper-pagination-bullet-inactive-color:   oklch(70% 0 0);
   --swiper-pagination-bullet-inactive-opacity: 1;
+
+  // Überschreibt .swiper { --swiper-* } aus _slider.scss (höhere Spezifität nötig)
+  .swiper,
+  &.swiper {
+    --swiper-theme-color:      var(--color-brand-blue);
+    --swiper-pagination-color: var(--color-brand-blue);
+  }
 
   .swiper-slide {
     figure,
@@ -72,9 +77,10 @@
     }
 
     img {
-      width: 100%;
+      max-width: 100%;
       height: auto;
       display: block;
+      margin: 0 auto;
     }
   }
 

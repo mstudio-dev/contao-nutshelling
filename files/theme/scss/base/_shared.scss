@@ -119,7 +119,7 @@ img {
   }
 }
 
-// Dunkelblau + kurzer gelber Akzentbalken für alle h1 in #main
+// Dunkelblau + kurzer Akzentbalken für alle h1 in #main
 [id="main"] h1 {
   color: var(--color-brand-blue);
   position: relative;
@@ -133,12 +133,12 @@ img {
     left: 0;
     width: 3rem;
     height: 4px;
-    background: var(--color-brand-yellow);
+    background: var(--color-brand-blue);
     border-radius: 2px;
   }
 }
 
-// Gelbes Underline für alle h2 in #main
+// Akzent-Underline für alle h2 in #main
 [id="main"] h2 {
   position: relative;
   display: inline-block;
@@ -152,7 +152,7 @@ img {
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--color-brand-yellow);
+    background-color: var(--color-brand-blue);
     border-radius: 2px;
   }
 }
@@ -188,6 +188,27 @@ img {
 .pb-sm { padding-bottom: var(--base-spacing-unit-sm) !important; }
 .pb-md { padding-bottom: var(--base-spacing-unit) !important; }
 .pb-lg { padding-bottom: var(--base-spacing-unit-lg) !important; }
+
+// Text-Ausrichtung
+.text-left   { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right  { text-align: right !important; }
+
+// Bild-Utilities
+img.w-100 { width: 100%; }
+
+// h2 in #main ist inline-block (wegen ::after-Unterstrich) →
+// text-align greift nur wenn auf block gewechselt wird
+[id="main"] h2.text-left,
+[id="main"] h2.text-center,
+[id="main"] h2.text-right { display: block; }
+
+// Zentrierte h2: kurzer Unterstrich wie h1, mittig ausgerichtet
+[id="main"] h2.text-center::after {
+  width: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 // .imagelink nur bei xxl (≥1400px)
 .imagelink {

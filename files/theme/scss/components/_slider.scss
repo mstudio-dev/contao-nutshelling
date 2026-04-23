@@ -75,7 +75,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: oklch(20% 0.07 255 / 0.35); // --color-brand-blue-dark
+      background: var(--hero-overlay);
       pointer-events: none;
     }
 

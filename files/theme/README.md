@@ -21,7 +21,7 @@ files/theme/
     ├── _config.scss        Nutshell-Konfiguration
     ├── base/
     │   ├── _animation.scss Scroll-Reveal-Klassen
-    │   ├── _article.scss   article--full, article--white, col-4/col-6-Grid
+    │   ├── _article.scss   article--full, article--white, col-4/col-6-6-Grid
     │   ├── _fonts.scss     @font-face Inter
     │   ├── _layout.scss    Header (sticky), #header-top, Footer
     │   ├── _shared.scss    #main-Abstände, h1/h2-Styling, Pagination, Spacing-Utilities
@@ -73,7 +73,7 @@ files/theme/js/theme-toggle.js
 
 | Klasse | Spalten | Beschreibung |
 |---|---|---|
-| `col-6` | 2 (50/50) | Inhaltselemente nebeneinander |
+| `col-6-6` | 2 (50/50) | Inhaltselemente nebeneinander |
 | `col-4` | 3 (33/33/33) | Inhaltselemente in drei Spalten |
 
 Innerhalb eines Grid-Artikels kann ein Element die volle Breite einnehmen:
@@ -98,7 +98,7 @@ Mobile (< 550px): immer 1 Spalte.
 | `headline--line` | content-headline | Gelbe Unterstrich-Linie unter Überschrift |
 | `btn` | content-hyperlink | Link als CI-Blau-Button mit Chevron-Icon |
 | `card` | content-hyperlink | Link als Karte (Überschrift + Fließtext + optionales Bild) |
-| `full-width` | beliebig (in col-4/col-6 oder card-Grid) | Element spannt alle Grid-Spalten |
+| `full-width` | beliebig (in col-4/col-6-6 oder card-Grid) | Element spannt alle Grid-Spalten |
 
 ## Spacing-Utilities (CSS-Klasse am Element)
 
@@ -162,7 +162,7 @@ Allgemeines Styling für das Contao Hyperlink-Element (`ce_hyperlink`):
 - **`.btn`**: Gefüllter CI-Blau-Button mit Chevron-Icon, Hover hellt auf
 - **`.card`**: Karte mit Link als Überschrift (fett, CI-Blau), Fließtext darunter (klein, grau).
   Bei externen Links erscheint ein kleines `fa-arrow-up-right-from-square`-Icon.
-  Automatisches Grid: Wenn ein Artikel (ohne `col-4`/`col-6`) mehrere `.card`-Hyperlinks enthält,
+  Automatisches Grid: Wenn ein Artikel (ohne `col-4`/`col-6-6`) mehrere `.card`-Hyperlinks enthält,
   werden sie per `:has()` automatisch in `auto-fill`-Grid arrangiert.
 
 ## ce_card

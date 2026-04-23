@@ -51,3 +51,39 @@
 @import 'components/markdown';
 @import 'components/login';
 @import 'components/sitemap';
+
+// ============================================================
+// CI-KONFIGURATION
+// Für Blau-CI (Standard): diesen Block auskommentieren.
+// Für andere CIs: --color-brand-* auf die neue Palette zeigen lassen.
+// Neue Paletten in _variables.scss ergänzen.
+// ============================================================
+
+// --- Rot-CI: Hellmodus (#B31E3B + #EF4136 + Weiß) ---
+html {
+  --color-brand-blue:       var(--color-brand-red);        // oklch(50% 0.18 17) = #B31E3B
+  --color-brand-blue-light: var(--color-brand-red-light);  // oklch(63% 0.21 28) = #EF4136
+  --color-brand-blue-dark:  var(--color-brand-red-dark);   // oklch(35% 0.15 17)
+  --color-brand-yellow:     oklch(100% 0 0);               // Weiß als Akzent
+  --links-outline-focus:    2px solid var(--color-brand-red-light); // Fokus-Ring: Hellrot
+  --hero-overlay:           oklch(0% 0 0 / 0.45);
+  --logo-width:             80px;
+}
+
+// --- Rot-CI: Dunkelmodus ---
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) {
+    --color-brand-blue:       oklch(65% 0.17 22);
+    --color-brand-blue-light: oklch(73% 0.15 22);
+    --color-brand-blue-dark:  oklch(50% 0.16 22);
+    --color-brand-yellow:     oklch(100% 0 0);
+    --hero-overlay:           oklch(0% 0 0 / 0.55);
+  }
+}
+html[data-color-scheme="dark"] {
+  --color-brand-blue:       oklch(65% 0.17 22);
+  --color-brand-blue-light: oklch(73% 0.15 22);
+  --color-brand-blue-dark:  oklch(50% 0.16 22);
+  --color-brand-yellow:     oklch(100% 0 0);
+  --hero-overlay:           oklch(0% 0 0 / 0.55);
+}

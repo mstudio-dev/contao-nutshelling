@@ -1,0 +1,21 @@
+{% extends '@Contao/fe_page' %}
+
+{% block header %}
+  {% if header %}
+    <header id="header"{% if headerClass %} class="{{ headerClass }}"{% endif %}>
+      <div class="inside">
+        {{ header|raw }}
+      </div>
+    </header>
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+  {% if footer %}
+    <footer id="footer"{% if footerClass %} class="{{ footerClass }}"{% endif %}>
+      <div class="inside">
+        {{ footer|raw }}
+      </div>
+    </footer>
+  {% endif %}
+{% endblock %}

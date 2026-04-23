@@ -1,0 +1,91 @@
+{% extends "@Contao/content_element/template.html.twig" %}
+
+{% block style %}
+<style>
+.zahlen-fakten-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--grid-gutter, 1.5rem);
+    justify-content: center;
+    text-align: center;
+}
+.zahlen-fakten-col {
+    flex: 1 1 200px;
+    max-width: 260px;
+}
+.zahlen-fakten-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1.5rem 1.25rem;
+    background: oklch(100% 0 0);
+    border-radius: var(--base-border-radius, .375rem);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.08);
+}
+.zahlen-fakten-card [class*="fa-"] {
+    color: var(--color-brand-blue);
+    margin-bottom: 1rem;
+}
+.zahlen-fakten-zahl {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-brand-blue);
+    margin: 0 0 .5rem;
+    position: static;
+}
+.zahlen-fakten-zahl::after {
+    display: none;
+}
+.zahlen-fakten-label {
+    font-size: 1rem;
+    color: var(--color-gray);
+    margin: 0;
+}
+@media (prefers-color-scheme: dark) {
+    html:not([data-color-scheme="light"]) .zahlen-fakten-card {
+        background: oklch(27% 0.025 255);
+        box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+    }
+}
+html[data-color-scheme="dark"] .zahlen-fakten-card {
+    background: oklch(27% 0.025 255);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.3);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="zahlen-fakten-row">
+    <div class="zahlen-fakten-col">
+        <div class="zahlen-fakten-card wow fadeIn" data-wow-duration="2s" data-wow-delay="0">
+            <i class="fa-solid fa-child fa-4x"></i>
+            <h2 class="zahlen-fakten-zahl timer count-title count-number" data-to="{{ kinder }}" data-speed="1500">0</h2>
+            <p class="zahlen-fakten-label">Kinder</p>
+        </div>
+    </div>
+    <div class="zahlen-fakten-col">
+        <div class="zahlen-fakten-card wow fadeIn" data-wow-duration="2s" data-wow-delay="0.1s">
+            <i class="fa-solid fa-user-plus fa-4x"></i>
+            <h2 class="zahlen-fakten-zahl timer count-title count-number" data-to="{{ klassen }}" data-speed="1500">0</h2>
+            <p class="zahlen-fakten-label">Klassen</p>
+        </div>
+    </div>
+    <div class="zahlen-fakten-col">
+        <div class="zahlen-fakten-card wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
+            <i class="fa-solid fa-pen-to-square fa-4x"></i>
+            <h2 class="zahlen-fakten-zahl timer count-title count-number" data-to="{{ lehrpersonen }}" data-speed="1500">0</h2>
+            <p class="zahlen-fakten-label">Lehrpersonen</p>
+        </div>
+    </div>
+    <div class="zahlen-fakten-col">
+        <div class="zahlen-fakten-card wow fadeIn" data-wow-duration="2s" data-wow-delay="0.3s">
+            <i class="fa-solid fa-users fa-4x"></i>
+            <h2 class="zahlen-fakten-zahl timer count-title count-number" data-to="{{ vorkursgruppen }}" data-speed="1500">0</h2>
+            <p class="zahlen-fakten-label">Vorkursgruppen</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

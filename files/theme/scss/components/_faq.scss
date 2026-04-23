@@ -61,7 +61,7 @@
       color: var(--color-brand-blue);
     }
 
-    &:hover { color: var(--color-brand-blue-light); }
+    &:hover { color: var(--color-brand-blue-dark); }
   }
 
   details[open] > .faq-question::after {
